@@ -52,7 +52,7 @@ const Header = () => {
           <Link to="/shop" className="hover:text-[#FF7629]">
             Shop
           </Link>
-          <Link to="/about" className="hover:text-[#FF7629]">
+          <Link to="/about-us" className="hover:text-[#FF7629]">
             About Us
           </Link>
           <Link to="/contact" className="hover:text-[#FF7629]">
