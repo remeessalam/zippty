@@ -8,15 +8,22 @@ import aboutvideo from "../assets/video/aboutsectionvideo.mp4";
 import ReactPlayer from "react-player";
 import { FaPlay } from "react-icons/fa";
 import Testimonials from "../Component /Testimonials";
+import aboutuspetsimage from "../assets/images/aboutuspetsimage.png";
 
 const AboutPage = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const togglePlayPause = () => {
     setIsPlaying(!isPlaying);
   };
+  const aboutBannerDetails = {
+    mainHeading: "The smarter way to shop for your pet",
+    paragraph: `At Zippty, we know your pets are more than just animals—they're
+    family. Whether you have a curious kitten or an energetic dog,`,
+    image: aboutuspetsimage,
+  };
   return (
     <div>
-      <Banner />
+      <Banner bannerDetails={aboutBannerDetails} />
       <div className="wrapper">
         <h2 className="title-heading">About our store</h2>
         <div className="grid md:grid-cols-2">

@@ -1,32 +1,51 @@
-const Banner = () => {
+import backgroundbg from "../assets/images/imagebg.png";
+import homebackgroundbg from "../assets/images/homebg.png";
+const Banner = ({ bannerDetails }) => {
+  const { mainHeading, paragraph, image, isHome } = bannerDetails;
   return (
-    <div className="flex flex-col md:flex-row items-center px-6 py-12 md:py-20">
-      {/* Left content */}
-      <div className="w-full md:w-1/2 space-y-6">
-        <span className="text-lg">Zippty</span>
-        <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-          The smarter way to shop for your pet
-        </h1>
-        <p className="text-gray-600 max-w-md">
-          At Zippty, we know your pets are more than just animals—they're
-          family. Whether you have a curious kitten or an energetic dog,
-        </p>
-        <button className="bg-black text-white px-8 py-3 rounded-md hover:bg-gray-800 transition-colors">
-          Shop Now
-        </button>
-      </div>
-
-      {/* Right image */}
-      <div className="w-full md:w-1/2 mt-8 md:mt-0">
-        <div className="relative">
-          <div className="absolute inset-0 bg-[#FF7629] rounded-full"></div>
+    <div className="relative">
+      <div className="wrapper grid md:grid-cols-2 px-6 py-16 items">
+        <div className="w-full relative min-h-[50vh]">
           <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-02-14%20at%204.56.14%E2%80%AFPM-l11toOf0lXz3Q0UxO8fYC7NDcGxgpG.png"
+            src={backgroundbg}
+            alt="bgimage"
+            className="w-[8rem] absolute right-0 -top-10 z-0"
+          />
+          <div className="h-full flex flex-col gap-5 relative z-10">
+            <span className="text-lg">Zippty</span>
+            <h1 className="text-4xl md:text-6xl font-bold leading-tight">
+              {mainHeading}{" "}
+            </h1>
+            <p className="text-gray-600 max-w-md">{paragraph}</p>
+            <button className="bg-black w-fit text-white px-8 py-3 rounded-md hover:bg-gray-800 transition-colors">
+              Shop Now
+            </button>
+          </div>
+        </div>
+
+        <div className="w-full flex justify-center items-center  mt-8 md:mt-0">
+          {/* <div
+            className={`w-full  h-[30rem] bg-no-repeat bg-center bg-contain bg-white flex justify-center ${
+              isHome ? `items-end` : `items-center`
+            }`}
+            style={{
+              backgroundImage: `url(${
+                isHome ? homebackgroundbg : backgroundbg
+              })`,
+            }}
+          ></div> */}
+          <img
+            src={image}
             alt="Collection of happy pet faces"
-            className="relative z-10"
+            className="relative z-10 "
           />
         </div>
       </div>
+      <img
+        src={backgroundbg}
+        alt="bgimage"
+        className="w-[8rem] absolute -left-16 bottom-[40%] z-0"
+      />
     </div>
   );
 };

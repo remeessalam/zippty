@@ -55,7 +55,7 @@ const Header = () => {
           <Link to="/about-us" className="hover:text-[#FF7629]">
             About Us
           </Link>
-          <Link to="/contact" className="hover:text-[#FF7629]">
+          <Link to="/contact-us" className="hover:text-[#FF7629]">
             Contact Us
           </Link>
         </div>
@@ -78,12 +78,12 @@ const Header = () => {
                 0
               </span>
             </button>
-            <button className="relative">
+            <Link to={"/cartitems"} className="relative">
               <FaShoppingCart size={24} />
               <span className="absolute -top-2 -right-2 bg-[#FF7629] text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                 0
               </span>
-            </button>
+            </Link>
           </div>
           {/* Mobile Menu Button */}
           <button className="md:hidden" onClick={toggleMenu}>

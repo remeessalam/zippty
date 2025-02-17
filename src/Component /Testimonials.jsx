@@ -1,37 +1,34 @@
 import React, { useState } from "react";
-
+import user1 from "../assets/images/testimonialsimage1.png";
+import backgroundbg from "../assets/images/imagebg.png";
 // Testimonials data array
 const testimonials = [
   {
     id: 1,
     name: "Gerald Ferguson",
     role: "Customer",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=80",
+    image: user1,
     text: "I can't thank Zippty enough! Bella has sensitive skin, and I had tried countless shampoos that just didn't work. After getting some advice from their team, I found the perfect grooming products for both Bella and Whiskers. The personalized service and fast shipping make it so easy for me to keep my pets' needs met, and I always feel confident in the products I'm buying. Highly recommend!",
   },
   {
     id: 2,
     name: "Sarah Johnson",
     role: "Customer",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=80",
+    image: user1,
     text: "The quality of service and products exceeded my expectations. The team went above and beyond to ensure my satisfaction. I've been a loyal customer for over a year now and couldn't be happier!",
   },
   {
     id: 3,
     name: "Michael Chen",
     role: "Customer",
-    image:
-      "https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=80",
+    image: user1,
     text: "Outstanding experience from start to finish. The attention to detail and customer service is unmatched. I've recommended this company to all my friends and family!",
   },
   {
     id: 4,
     name: "Emma Williams",
     role: "Customer",
-    image:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=80",
+    image: user1,
     text: "What sets them apart is their commitment to excellence. Every interaction has been pleasant and professional. The products are top-notch and the service is exceptional!",
   },
 ];
@@ -129,12 +126,17 @@ function Testimonials() {
 
         {/* Image Section */}
         <div className="w-full lg:w-1/2 flex justify-center">
-          <div className="relative">
-            <div className="absolute inset-0 bg-orange-500 rounded-full transform scale-110" />
+          <div className="relative w-full flex justify-center items-center">
+            {/* <div className="absolute inset-0 bg-orange-500 rounded-full transform scale-110" /> */}
+            <img
+              src={backgroundbg}
+              alt="background-image"
+              className="w-[500px] h-[500px] absolute"
+            />
             <img
               src={testimonials[currentIndex].image || "/placeholder.svg"}
               alt={`${testimonials[currentIndex].name}'s testimonial`}
-              className="w-[400px] h-[400px] object-cover rounded-full relative z-10"
+              className="w-[350px] h-[350px] object-cover rounded-full relative z-10"
             />
           </div>
         </div>

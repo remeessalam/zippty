@@ -68,3 +68,43 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+---
+
+export default function ProfileFrame() {
+return (
+
+<div className="relative w-[500px] h-[500px] flex items-center justify-center">
+{/_ Orange blob SVG _/}
+<svg
+viewBox="0 0 500 500"
+className="absolute w-full h-full"
+style={{ filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.1))" }} >
+<defs>
+<linearGradient id="orangeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" style={{ stopColor: "#FF8A65" }} />
+<stop offset="100%" style={{ stopColor: "#FFA07A" }} />
+</linearGradient>
+</defs>
+<path
+          d="M250,50 
+          C 380,50 450,150 450,250
+          C 450,350 380,450 250,450
+          C 120,450 50,350 50,250
+          C 50,150 120,50 250,50 Z"
+          fill="url(#orangeGradient)"
+        />
+</svg>
+
+      {/* Profile image */}
+      <div className="relative w-[300px] h-[300px] rounded-full overflow-hidden">
+        <img
+          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-02-15%20at%206.05.07%E2%80%AFPM-juXrC0xGOeLCrw4Rz1akKETJVWH2Sq.png"
+          alt="Profile"
+          className="w-full h-full object-cover"
+        />
+      </div>
+    </div>
+
+)
+}
