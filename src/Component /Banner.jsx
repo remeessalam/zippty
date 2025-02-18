@@ -23,22 +23,23 @@ const Banner = ({ bannerDetails }) => {
           </div>
         </div>
 
-        <div className="w-full flex justify-center items-center  mt-8 md:mt-0">
-          {/* <div
-            className={`w-full  h-[30rem] bg-no-repeat bg-center bg-contain bg-white flex justify-center ${
-              isHome ? `items-end` : `items-center`
+        <div className="w-full flex justify-center items-end  mt-8 md:mt-0">
+          <div
+            className={`w-full h-[20rem]  md:h-[30rem] bg-no-repeat bg-center bg-contain bg-white flex justify-center ${
+              isHome ? `items-end` : `items-end`
             }`}
             style={{
               backgroundImage: `url(${
-                isHome ? homebackgroundbg : backgroundbg
+                isHome ? homebackgroundbg : homebackgroundbg
               })`,
             }}
-          ></div> */}
-          <img
-            src={image}
-            alt="Collection of happy pet faces"
-            className="relative z-10 "
-          />
+          >
+            <img
+              src={image}
+              alt="Collection of happy pet faces"
+              className="relative z-10 h-[15rem] md:h-[27rem]"
+            />
+          </div>
         </div>
       </div>
       <img

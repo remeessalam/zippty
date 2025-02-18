@@ -4,7 +4,7 @@ import dogtwo from "../assets/images/dogtwo.jpeg";
 
 const TwoDogs = () => {
   return (
-    <div>
+    <div className="paddingTop paddingBottom">
       <div className="wrapper grid md:grid-cols-2 gap-5">
         <img
           src={dogone}

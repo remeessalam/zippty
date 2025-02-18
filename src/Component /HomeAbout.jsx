@@ -3,13 +3,13 @@ import homeaboutsection from "../assets/images/homeaboutsection.png";
 import homepagecompanylogos from "../assets/images/homepagecompanylogos.png";
 const HomeAbout = () => {
   return (
-    <div>
+    <div className="paddingTop paddingBottom">
       <div className="wrapper">
         <div className="grid md:grid-cols-2">
           <img src={homeaboutsection} alt="" />
           <div className="h-full flex flex-col gap-5 relative z-10">
-            <span className="text-lg">Zippty</span>
-            <h1 className="text-4xl md:text-6xl font-bold leading-tight">
+            <span className="companyName">Zippty</span>
+            <h1 className="title-heading">
               The smarter way to shop for your pet
             </h1>
             <p className="text-gray-600 max-w-md">

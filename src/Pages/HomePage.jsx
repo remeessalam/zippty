@@ -6,6 +6,8 @@ import FeaturedProducts from "../Component /FeaturedProducts";
 import HomeAbout from "../Component /HomeAbout";
 import Testimonials from "../Component /Testimonials";
 import Blogs from "../Component /Blogs";
+import ProductGrid from "../Component /ProductGrid";
+import { products } from "../util/productsDetails";
 const HomePage = () => {
   const homeBannerDetails = {
     mainHeading: "The smarter way to shop for your pet",
@@ -20,6 +22,10 @@ const HomePage = () => {
       <CategorySlider />
       <FeaturedProducts />
       <HomeAbout />
+      <div>
+        <h1 className="title-heading text-center">Best selling products</h1>
+        <ProductGrid products={products.slice(0, 8)} />
+      </div>
       <Testimonials />
       <Blogs />
     </div>

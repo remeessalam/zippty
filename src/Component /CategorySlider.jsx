@@ -2,53 +2,7 @@
 
 import { FaChevronLeft, FaChevronRight, FaArrowRight } from "react-icons/fa";
 import { useState } from "react";
-
-const categories = [
-  {
-    name: "Accessories",
-    products: 84,
-    image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-02-17%20at%202.49.24%E2%80%AFPM-lOO0Wfpl1K0OHaJt4VqizXJcomUosp.png",
-  },
-  {
-    name: "Toys",
-    products: 64,
-    image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-02-17%20at%202.49.24%E2%80%AFPM-lOO0Wfpl1K0OHaJt4VqizXJcomUosp.png",
-  },
-  {
-    name: "Food",
-    products: 22,
-    image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-02-17%20at%202.49.24%E2%80%AFPM-lOO0Wfpl1K0OHaJt4VqizXJcomUosp.png",
-  },
-  {
-    name: "Cloths",
-    products: 16,
-    image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-02-17%20at%202.49.24%E2%80%AFPM-lOO0Wfpl1K0OHaJt4VqizXJcomUosp.png",
-  },
-  {
-    name: "Beds",
-    products: 45,
-    image: "/placeholder.svg?height=300&width=400",
-  },
-  {
-    name: "Healthcare",
-    products: 38,
-    image: "/placeholder.svg?height=300&width=400",
-  },
-  {
-    name: "Grooming",
-    products: 29,
-    image: "/placeholder.svg?height=300&width=400",
-  },
-  {
-    name: "Training",
-    products: 52,
-    image: "/placeholder.svg?height=300&width=400",
-  },
-];
+import { categories } from "../util/contant";
 
 export default function CategorySlider() {
   const [startIndex, setStartIndex] = useState(0);
@@ -62,16 +16,16 @@ export default function CategorySlider() {
   };
 
   return (
-    <div className="px-4 py-8 md:px-6 lg:px-8">
+    <div className="wrapper paddingTop paddingBottom">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-3xl font-bold">Browse by category</h2>
+        <h2 className="title-heading">Browse by category</h2>
         <div className="flex gap-2">
           <button
             variant="outline"
             size="icon"
             onClick={showPrevious}
             disabled={startIndex === 0}
-            className="rounded-full"
+            className="rounded-full bg-black p-3 text-white"
           >
             <FaChevronLeft className="h-4 w-4" />
           </button>
@@ -80,7 +34,7 @@ export default function CategorySlider() {
             size="icon"
             onClick={showNext}
             disabled={startIndex >= categories.length - 4}
-            className="rounded-full"
+            className="rounded-full bg-black text-white p-3"
           >
             <FaChevronRight className="h-4 w-4" />
           </button>
@@ -98,10 +52,9 @@ export default function CategorySlider() {
                 <img
                   src={category.image || "/placeholder.svg"}
                   alt={category.name}
-                  className="w-full h-[200px] object-cover"
+                  className="w-full h-[200px] object-cover rounded-t-2xl"
                 />
-                <div className="absolute inset-0 bg-black/40" />
-                <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                <div className=" p-4 text-black">
                   <div className="flex items-center justify-between">
                     <div>
                       <h3 className="text-xl font-semibold">{category.name}</h3>
@@ -109,7 +62,7 @@ export default function CategorySlider() {
                         {category.products} products
                       </p>
                     </div>
-                    <FaArrowRight className="h-5 w-5 transform group-hover:translate-x-1 transition-transform" />
+                    <FaArrowRight className="h-5 w-5 transform group-hover:translate-x-1 transition-transform text-primary" />
                   </div>
                 </div>
               </div>

@@ -24,8 +24,8 @@ const Blogs = () => {
   ];
   return (
     <div>
-      <div className="wrapper">
-        <h1 className="title-heading text-center">News & Blog</h1>{" "}
+      <div className="wrapper paddingTop paddingBottom">
+        <h1 className="title-heading text-center mb-6">News & Blog</h1>{" "}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {blogsDetails.map((obj) => (
             <div className="rounded-2xl overflow-hidden">

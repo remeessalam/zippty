@@ -1,7 +1,11 @@
 import teamImage1 from "../assets/images/team/team-image-1.png";
 import teamImage2 from "../assets/images/team/team-image-2.png";
 import teamImage3 from "../assets/images/team/team-image-3.png";
-
+//categories images
+import accessories from "../assets/images/categories/accessories.jpeg";
+import toys from "../assets/images/categories/toys.jpeg";
+import food from "../assets/images/categories/food.jpeg";
+import cloths from "../assets/images/categories/cloths.jpeg";
 export const navLinks = [
   { path: "/", label: "Home" },
   { path: "/shop", label: "Shop" },
@@ -53,5 +57,28 @@ export const ourTeam = [
     image: teamImage3,
     name: "Averi Maddox",
     position: "Seller",
+  },
+];
+
+export const categories = [
+  {
+    name: "Accessories",
+    products: 84,
+    image: accessories,
+  },
+  {
+    name: "Toys",
+    products: 64,
+    image: toys,
+  },
+  {
+    name: "Food",
+    products: 22,
+    image: food,
+  },
+  {
+    name: "Cloths",
+    products: 16,
+    image: cloths,
   },
 ];

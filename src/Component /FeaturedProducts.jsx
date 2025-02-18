@@ -21,8 +21,8 @@ Control`,
   ];
   return (
     <div>
-      <div className="wrapper">
-        <h1 className="title-heading text-center">FeaturedProducts</h1>
+      <div className="wrapper paddingTop paddingBottom">
+        <h1 className="title-heading text-center mb-6">FeaturedProducts</h1>
         <div className="flex justify-center gap-5 flex-wrap">
           {productDetails.map((obj) => (
             <ItemCard cardDetails={obj} />
