@@ -18,9 +18,8 @@ const ProductDetails = () => {
     setQuantity(quantity + 1);
   };
   const aboutBannerDetails = {
-    mainHeading: "The smarter way to shop for your pet",
-    paragraph: `At Zippty, we know your pets are more than just animals—they're
-        family. Whether you have a curious kitten or an energetic dog,`,
+    mainHeading: "The friendly and caring small pet store",
+    paragraph: `At Zippty, we know your pets are more than just animals—they’re family. Whether you have a curious kitten or an energetic dog,`,
     image: productdetailspetsimage,
   };
   return (

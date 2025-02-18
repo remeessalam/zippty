@@ -10,9 +10,8 @@ import ProductGrid from "../Component /ProductGrid";
 import { products } from "../util/productsDetails";
 const HomePage = () => {
   const homeBannerDetails = {
-    mainHeading: "The smarter way to shop for your pet",
-    paragraph: `At Zippty, we know your pets are more than just animals—they're
-    family. Whether you have a curious kitten or an energetic dog,`,
+    mainHeading: "A pet store with everything you need",
+    paragraph: `At Zippty, we know your pets are more than just animals—they’re family. Whether you have a curious kitten or an energetic dog,`,
     image: homepagepetsimage,
     isHome: true,
   };

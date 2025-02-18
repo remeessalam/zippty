@@ -37,7 +37,7 @@ const Banner = ({ bannerDetails }) => {
             <img
               src={image}
               alt="Collection of happy pet faces"
-              className="relative z-10 h-[15rem] md:h-[27rem]"
+              className="relative z-10 h-[15rem] md:h-[27rem] object-cover"
             />
           </div>
         </div>
