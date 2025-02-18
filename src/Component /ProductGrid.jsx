@@ -12,7 +12,7 @@ const ProductGrid = ({ products }) => {
             key={product.title}
             className="group relative border rounded-lg overflow-hidden"
           >
-            <Link to="#">
+            <Link to="/product">
               <div className="aspect-square overflow-hidden">
                 <img
                   src={product.image || "/placeholder.svg"}
