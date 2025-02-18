@@ -1,6 +1,13 @@
 import teamImage1 from "../assets/images/team/team-image-1.png";
 import teamImage2 from "../assets/images/team/team-image-2.png";
 import teamImage3 from "../assets/images/team/team-image-3.png";
+
+export const navLinks = [
+  { path: "/", label: "Home" },
+  { path: "/shop", label: "Shop" },
+  { path: "/about-us", label: "About Us" },
+  { path: "/contact-us", label: "Contact Us" },
+];
 export const petCareFeatures = [
   {
     id: 1,

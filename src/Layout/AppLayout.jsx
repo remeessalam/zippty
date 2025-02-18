@@ -7,7 +7,9 @@ const AppLayout = () => {
   return (
     <>
       <Header />
-      <Outlet />
+      <div className="pt-[116px]">
+        <Outlet />
+      </div>
       <Footer />
     </>
   );

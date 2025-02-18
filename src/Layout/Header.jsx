@@ -9,19 +9,20 @@ import {
   FaBars,
   FaTimes,
 } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { navLinks } from "../util/contant";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const location = useLocation();
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   return (
-    <header className="w-full shadow-sm">
+    <header className="w-full fixed z-40">
       {/* Top bar */}
-      <div className="hidden md:flex justify-between items-center px-6 py-2 bg-gray-50">
+      <div className="hidden md:flex justify-between items-center px-6 py-2 bg-white">
         <div className="flex items-center space-x-6">
           <div className="flex items-center space-x-2">
             <FaPhone size={16} />
@@ -34,30 +35,31 @@ const Header = () => {
         </div>
         <div className="flex items-center space-x-2">
           <FaMapMarkerAlt size={16} />
-          <span className="text-sm">
+          <span className="text-sm font-bold">
             JP Colony, Shastri Nagar, Jaipur, Rajasthan -302016
           </span>
         </div>
       </div>
 
       {/* Main navigation */}
-      <nav className="flex items-center justify-between px-6 py-4">
-        <div className="text-xl font-bold">Zippty</div>
+      <nav className="bg-white flex items-center justify-between px-16 py-4 wrapper rounded-full shadow-xl">
+        <div className="text-xl font-bold ml-3">Zippty</div>
 
         {/* Desktop Navigation Links */}
         <div className="hidden md:flex items-center space-x-8">
-          <Link to="/" className="text-[#FF7629] hover:text-[#FF7629]">
-            Home
-          </Link>
-          <Link to="/shop" className="hover:text-[#FF7629]">
-            Shop
-          </Link>
-          <Link to="/about-us" className="hover:text-[#FF7629]">
-            About Us
-          </Link>
-          <Link to="/contact-us" className="hover:text-[#FF7629]">
-            Contact Us
-          </Link>
+          {navLinks.map((link) => (
+            <Link
+              key={link.path}
+              to={link.path}
+              className={`hover:text-[#FF7629] ${
+                location.pathname === link.path
+                  ? "text-[#FF7629]"
+                  : "text-black"
+              }`}
+            >
+              {link.label}
+            </Link>
+          ))}
         </div>
 
         {/* Search and Icons */}
@@ -71,14 +73,14 @@ const Header = () => {
             <FaSearch className="absolute right-3 text-gray-400" size={20} />
           </div>
 
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center gap-4">
             <button className="relative">
               <FaHeart size={24} />
               <span className="absolute -top-2 -right-2 bg-[#FF7629] text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                 0
               </span>
             </button>
-            <Link to={"/cartitems"} className="relative">
+            <Link to={"/cartitems"} className="relative mr-3">
               <FaShoppingCart size={24} />
               <span className="absolute -top-2 -right-2 bg-[#FF7629] text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                 0
@@ -103,34 +105,20 @@ const Header = () => {
             <FaTimes size={24} />
           </button>
           <div className="flex flex-col space-y-4">
-            <Link
-              to="/"
-              className="text-[#FF7629] hover:text-[#FF7629]"
-              onClick={toggleMenu}
-            >
-              Home
-            </Link>
-            <Link
-              to="/shop"
-              className="hover:text-[#FF7629]"
-              onClick={toggleMenu}
-            >
-              Shop
-            </Link>
-            <Link
-              to="/about"
-              className="hover:text-[#FF7629]"
-              onClick={toggleMenu}
-            >
-              About Us
-            </Link>
-            <Link
-              to="/contact"
-              className="hover:text-[#FF7629]"
-              onClick={toggleMenu}
-            >
-              Contact Us
-            </Link>
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={`hover:text-[#FF7629] ${
+                  location.pathname === link.path
+                    ? "text-[#FF7629]"
+                    : "text-black"
+                }`}
+                onClick={toggleMenu}
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
       </div>
