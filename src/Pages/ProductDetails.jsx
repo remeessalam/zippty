@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { productDetails } from "../util/productsDetails";
 
 const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
@@ -145,11 +146,11 @@ const ProductDetails = () => {
           {/* Product Images */}
           <div className="space-y-4">
             <img
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-02-18%20at%2011.13.11%E2%80%AFAM-yxloC2nnB1IsqvGeQL3JU8mFsTNg0T.png"
+              src={productDetails[0].images[0]}
               alt="E&E Bestlife Smart Car Remote Control"
               className="w-full rounded-lg"
             />
-            <div className="grid grid-cols-3 gap-2">
+            {/* <div className="grid grid-cols-3 gap-2">
               <img
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-02-18%20at%2011.13.11%E2%80%AFAM-yxloC2nnB1IsqvGeQL3JU8mFsTNg0T.png"
                 alt="Product view"
@@ -165,7 +166,7 @@ const ProductDetails = () => {
                 alt="Product view"
                 className="w-full rounded-lg"
               />
-            </div>
+            </div> */}
           </div>
 
           {/* Product Details */}
@@ -217,44 +218,66 @@ const ProductDetails = () => {
             </div>
 
             {/* Additional Information */}
-            <div className="space-y-4">
-              <h3 className="font-medium">Additional Information</h3>
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div>
-                  <p className="font-medium">Pet Key type</p>
-                  <p>Remote Tag</p>
-                </div>
-                <div>
-                  <p className="font-medium">Target Species</p>
-                  <p>Cat</p>
-                </div>
-                <div>
-                  <p className="font-medium">Recommended Use</p>
-                  <p>M</p>
-                </div>
-                <div>
-                  <p className="font-medium">Pet Product</p>
-                  <p>Playing</p>
-                </div>
-                <div>
-                  <p className="font-medium">Cartoon Character</p>
-                  <p>No</p>
-                </div>
-                <div>
-                  <p className="font-medium">Indoor/Outdoor Usage</p>
-                  <p>Indoor</p>
-                </div>
-                <div>
-                  <p className="font-medium">Color</p>
-                  <p>Blue</p>
-                </div>
-                <div>
-                  <p className="font-medium">Available Sunshine System</p>
-                  <p>System</p>
-                </div>
+          </div>
+        </div>
+        <div className="grid md:grid-cols-2">
+          <div className="space-y-4">
+            <h3 className="font-medium">Additional Information</h3>
+            <div className="grid grid-cols-2 gap-4 text-sm">
+              <div>
+                <p className="font-medium">Pet Key type</p>
+                <p>Remote Tag</p>
+              </div>
+              <div>
+                <p className="font-medium">Target Species</p>
+                <p>Cat</p>
+              </div>
+              <div>
+                <p className="font-medium">Recommended Use</p>
+                <p>M</p>
+              </div>
+              <div>
+                <p className="font-medium">Pet Product</p>
+                <p>Playing</p>
+              </div>
+              <div>
+                <p className="font-medium">Cartoon Character</p>
+                <p>No</p>
+              </div>
+              <div>
+                <p className="font-medium">Indoor/Outdoor Usage</p>
+                <p>Indoor</p>
+              </div>
+              <div>
+                <p className="font-medium">Color</p>
+                <p>Blue</p>
+              </div>
+              <div>
+                <p className="font-medium">Available Sunshine System</p>
+                <p>System</p>
               </div>
             </div>
           </div>
+          <div>
+            {" "}
+            <div className="space-y-4">
+              <img
+                src={productDetails[0].images[0]}
+                alt="E&E Bestlife Smart Car Remote Control"
+                className="w-full rounded-lg"
+              />
+            </div>
+          </div>
+        </div>
+        <div className="grid md grid-cols-3 gap-8">
+          {productDetails[0].images.map((obj, i) => (
+            <img
+              key={i}
+              src={obj}
+              alt="product-image"
+              className={`rounded-3xl`}
+            />
+          ))}
         </div>
       </div>
     </div>
