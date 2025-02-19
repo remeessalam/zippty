@@ -6,9 +6,14 @@ import CategorySlider from "../Component /CategorySlider";
 import ProductFilters from "../Component /ProductFilters";
 import TwoDogs from "../Component /TwoDogs";
 import ProductGrid from "../Component /ProductGrid";
+import { useCart } from "../Store/cartContext";
+import { Link } from "react-router-dom";
 
 const ProductDetails = () => {
+  const { addToCart, cartItems } = useCart(); // Get cartItems and addToCart
   const [quantity, setQuantity] = useState(1);
+
+  const product = productDetails[0]; // Select the first product (replace with dynamic selection if needed)
 
   const decreaseQuantity = () => {
     if (quantity > 1) setQuantity(quantity - 1);
@@ -17,11 +22,26 @@ const ProductDetails = () => {
   const increaseQuantity = () => {
     setQuantity(quantity + 1);
   };
+
+  const handleAddToCart = () => {
+    addToCart({
+      id: product.id,
+      name: product.productName,
+      price: product.actualPrice,
+      image: product.productImage,
+      quantity: quantity,
+    });
+  };
+
+  // Check if product is already in the cart
+  const isInCart = cartItems.some((item) => item.id === product.id);
+
   const aboutBannerDetails = {
     mainHeading: "The friendly and caring small pet store",
     paragraph: `At Zippty, we know your pets are more than just animals—they’re family. Whether you have a curious kitten or an energetic dog,`,
     image: productdetailspetsimage,
   };
+
   return (
     <div>
       <Banner bannerDetails={aboutBannerDetails} />
@@ -37,19 +57,19 @@ const ProductDetails = () => {
             {/* Product Images */}
             <div className="space-y-4">
               <img
-                src={productDetails[0].productImage}
-                alt="E&E Bestlife Smart Car Remote Control"
+                src={product.productImage}
+                alt={product.productName}
                 className="w-full rounded-lg"
               />
             </div>
 
             {/* Product Details */}
             <div className="space-y-4">
-              <h1 className="small-heading">
-                E&E Bestlife Smart Car Remote Control
-              </h1>
+              <h1 className="small-heading">{product.productName}</h1>
               <div className="flex items-center gap-2">
-                <span className="text-2xl font-bold">$1,099</span>
+                <span className="text-2xl font-bold">
+                  ${product.actualPrice}
+                </span>
                 <span className="text-sm text-gray-500">
                   Count(11,959 / Count)
                 </span>
@@ -61,45 +81,51 @@ const ProductDetails = () => {
                   </span>
                 ))}
               </div>
-              <p className="text-gray-600">
-                Your home deserves safer key keeps your pets entertained. Remote
-                control system designed to give your pet their freedom modern
-                best patterns that trigger their natural chase instinct. An
-                exciting, active charge anytime inside of safe and working
-                environment. Pets can play with this toy when they are alone at
-                homes
-              </p>
+              <p className="text-gray-600">{product.description}</p>
 
-              {/* Quantity and Add to Cart */}
+              {/* Quantity and Cart Buttons */}
               <div className="flex items-center gap-4">
-                <div className="flex items-center border rounded">
-                  <button
-                    onClick={decreaseQuantity}
-                    className="px-3 py-1 border-r hover:bg-gray-100"
+                {!isInCart ? (
+                  <>
+                    <div className="flex items-center border rounded">
+                      <button
+                        onClick={decreaseQuantity}
+                        className="px-3 py-1 border-r hover:bg-gray-100"
+                      >
+                        -
+                      </button>
+                      <span className="px-4">{quantity}</span>
+                      <button
+                        onClick={increaseQuantity}
+                        className="px-3 py-1 border-l hover:bg-gray-100"
+                      >
+                        +
+                      </button>
+                    </div>
+                    <button
+                      onClick={handleAddToCart}
+                      className="bg-black text-white px-6 py-2 rounded flex items-center gap-2"
+                    >
+                      <span>Add To Cart</span>
+                    </button>
+                  </>
+                ) : (
+                  <Link
+                    to="/cartitems"
+                    className="bg-green-600 text-white px-6 py-2 rounded flex items-center gap-2"
                   >
-                    -
-                  </button>
-                  <span className="px-4">{quantity}</span>
-                  <button
-                    onClick={increaseQuantity}
-                    className="px-3 py-1 border-l hover:bg-gray-100"
-                  >
-                    +
-                  </button>
-                </div>
-                <button className="bg-black text-white px-6 py-2 rounded flex items-center gap-2">
-                  <span>Add To Cart</span>
-                </button>
+                    <span>Go to Cart</span>
+                  </Link>
+                )}
               </div>
-
-              {/* Additional Information */}
             </div>
           </div>
+
           <div className="grid md:grid-cols-2 paddingTop paddingBottom">
             <div className="space-y-4">
               <h3 className="small-heading">Additional Information</h3>
               <div className="grid grid-cols-1 gap-4 text-sm">
-                {Object.entries(productDetails[0].additionalInformation).map(
+                {Object.entries(product.additionalInformation).map(
                   ([key, value]) => (
                     <div key={key} className="grid grid-cols-2">
                       <p className="font-bold">{key}</p>
@@ -110,23 +136,23 @@ const ProductDetails = () => {
               </div>
             </div>
             <div>
-              {" "}
               <div className="space-y-4">
                 <img
-                  src={productDetails[0].productImage}
-                  alt="E&E Bestlife Smart Car Remote Control"
+                  src={product.productImage}
+                  alt={product.productName}
                   className="w-full rounded-lg"
                 />
               </div>
             </div>
           </div>
-          <div className="grid md grid-cols-3 gap-8">
-            {productDetails[0].images.map((obj, i) => (
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {product.images.map((obj, i) => (
               <img
                 key={i}
                 src={obj}
                 alt="product-image"
-                className={`rounded-3xl`}
+                className="rounded-3xl"
               />
             ))}
           </div>

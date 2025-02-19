@@ -10,10 +10,10 @@ const ItemCard = ({ cardDetails }) => {
         className="max-h-[20rem] w-[320px] object-cover"
       />
       <div className="p-4 flex flex-col gap-2">
-        <h1 className=" softTitle max-w-[18rem] group-hover:hardTitle transition-all duration-300">
+        <h1 className=" softTitle max-w-[18rem]  transition-all duration-300">
           {title}
         </h1>
-        <p className="group-hover:hardTitle transition-all duration-300">
+        <p className=" transition-all duration-300">
           ₹{actualPrice} <span className="line-through">MRP ₹{mrp}</span>
         </p>
       </div>

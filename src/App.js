@@ -6,6 +6,7 @@ import ContactusPage from "./Pages/ContactusPage";
 import CartPage from "./Pages/CartPage";
 import ProductPage from "./Pages/ProductsPage";
 import ProductDetails from "./Pages/ProductDetails";
+import WishlistPage from "./Pages/WishlistPage";
 
 const AppRouter = createBrowserRouter([
   {
@@ -18,6 +19,7 @@ const AppRouter = createBrowserRouter([
       { path: "/cartitems", element: <CartPage /> },
       { path: "/shop", element: <ProductPage /> },
       { path: "/product", element: <ProductDetails /> },
+      { path: "/wishlist", element: <WishlistPage /> },
     ],
   },
 ]);

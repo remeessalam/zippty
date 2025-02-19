@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { products } from "../util/productsDetails";
 
 const ProductFilters = () => {
+  const [price, setPrice] = useState(9);
   const categories = [
     { name: "Furniture", count: 21 },
     { name: "Bowls", count: 29 },
@@ -67,10 +68,12 @@ const ProductFilters = () => {
               type="range"
               min="9"
               max="369"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
               className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
             />
             <div className="flex items-center justify-between mt-4">
-              <span className="text-sm">Price: $9 - $369</span>
+              <span className="text-sm">Price: ${price} - $369</span>
               <button className="bg-gray-900 text-white px-4 py-1 text-sm rounded">
                 Apply
               </button>

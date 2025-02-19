@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   FaPhone,
   FaEnvelope,
@@ -11,16 +11,38 @@ import {
 } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import { navLinks } from "../util/contant";
+import { useWishlist } from "../Store/wishlistContext";
+import { useCart } from "../Store/cartContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
+  const [isVisible, setIsVisible] = useState(true);
   const location = useLocation();
+  const { wishlist } = useWishlist();
+  const { cartItems } = useCart();
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.scrollY;
+      setIsVisible(currentScrollPos < 50 || prevScrollPos > currentScrollPos);
+      setPrevScrollPos(currentScrollPos);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [prevScrollPos]);
+
   return (
-    <header className="w-full fixed z-40">
+    <header
+      className={`w-full fixed z-40 transition-transform duration-500 ${
+        isVisible ? "translate-y-0" : "-translate-y-full"
+      }`}
+    >
       {/* Top bar */}
       <div className="hidden md:flex justify-between items-center px-6 py-2 bg-white">
         <div className="flex items-center space-x-6">
@@ -74,16 +96,16 @@ const Header = () => {
           </div>
 
           <div className="flex items-center gap-4">
-            <button className="relative">
+            <Link to={"/wishlist"} className="relative">
               <FaHeart size={24} />
               <span className="absolute -top-2 -right-2 bg-[#FF7629] text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                0
+                {wishlist.length}
               </span>
-            </button>
+            </Link>
             <Link to={"/cartitems"} className="relative mr-3">
               <FaShoppingCart size={24} />
               <span className="absolute -top-2 -right-2 bg-[#FF7629] text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                0
+                {cartItems.length}
               </span>
             </Link>
           </div>

@@ -1,76 +1,19 @@
 "use client";
 
-import { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { BsCart3 } from "react-icons/bs";
-
-const initialCartItems = [
-  {
-    id: 1,
-    name: "Zippity Interactive Laser Toy",
-    price: 12.99,
-    quantity: 2,
-    image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-02-17%20at%204.28.51%E2%80%AFPM-E8URsWJCClX9wyE6depgNbzeOmZtPF.png",
-  },
-  {
-    id: 2,
-    name: "Cat Luggage",
-    price: 50.0,
-    quantity: 1,
-    image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-02-17%20at%204.28.51%E2%80%AFPM-E8URsWJCClX9wyE6depgNbzeOmZtPF.png",
-  },
-  {
-    id: 3,
-    name: "Premium Dog Food",
-    price: 45.99,
-    quantity: 1,
-    image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-02-17%20at%204.28.51%E2%80%AFPM-E8URsWJCClX9wyE6depgNbzeOmZtPF.png",
-  },
-  {
-    id: 4,
-    name: "Dog Bed",
-    price: 99.99,
-    quantity: 2,
-    image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-02-17%20at%204.28.51%E2%80%AFPM-E8URsWJCClX9wyE6depgNbzeOmZtPF.png",
-  },
-  {
-    id: 5,
-    name: "Dog Bowl",
-    price: 25.98,
-    quantity: 1,
-    image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-02-17%20at%204.28.51%E2%80%AFPM-E8URsWJCClX9wyE6depgNbzeOmZtPF.png",
-  },
-];
+import { useCart } from "../Store/cartContext";
+import { Link } from "react-router-dom";
 
 const CartItems = () => {
-  const [cartItems, setCartItems] = useState(initialCartItems);
-
-  const updateQuantity = (id, newQuantity) => {
-    setCartItems(
-      cartItems.map((item) =>
-        item.id === id
-          ? { ...item, quantity: Number.parseInt(newQuantity) }
-          : item
-      )
-    );
-  };
-
-  const removeItem = (id) => {
-    setCartItems(cartItems.filter((item) => item.id !== id));
-  };
-
+  const { cartItems, removeFromCart } = useCart();
+  console.log(cartItems, "asdfasdfasf");
   const calculateTotal = () => {
     return cartItems.reduce(
       (total, item) => total + item.price * item.quantity,
       0
     );
   };
-
   if (cartItems.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[400px] p-4">
@@ -81,6 +24,14 @@ const CartItems = () => {
         <p className="text-gray-500">
           Looks like you haven't added any items yet
         </p>
+        <div className="flex justify-center mt-6">
+          <Link
+            to="/shop"
+            className="bg-orange-500 text-white px-6 py-2 rounded-full shadow-md hover:bg-orange-600"
+          >
+            Continue Shopping
+          </Link>
+        </div>
       </div>
     );
   }
@@ -113,22 +64,25 @@ const CartItems = () => {
                     <span>{item.name}</span>
                   </div>
                 </td>
-                <td className="p-4">${item.price.toFixed(2)}</td>
+                <td className="p-4">${item?.price?.toFixed(2)}</td>
                 <td className="p-4">
-                  <input
+                  <div className="border text-center w-fit mr-auto px-8 py-1 rounded-xl">
+                    {item.quantity}
+                  </div>
+                  {/* <input
                     type="number"
                     min="1"
                     value={item.quantity}
                     onChange={(e) => updateQuantity(item.id, e.target.value)}
                     className="w-20 p-2 border rounded"
-                  />
+                  /> */}
                 </td>
                 <td className="p-4">
-                  ${(item.price * item.quantity).toFixed(2)}
+                  ${(item?.price * item?.quantity)?.toFixed(2)}
                 </td>
                 <td className="p-4">
                   <button
-                    onClick={() => removeItem(item.id)}
+                    onClick={() => removeFromCart(item.id)}
                     className="text-black hover:text-gray-700"
                   >
                     <RxCross2 size={20} />
@@ -143,7 +97,7 @@ const CartItems = () => {
       <div className="flex justify-end mt-6">
         <div className="text-right">
           <div className="text-lg font-semibold mb-4">
-            CART TOTAL = ${calculateTotal().toFixed(2)}
+            CART TOTAL = ${calculateTotal()?.toFixed(2)}
           </div>
           <button className="bg-[#2F5F3A] text-white py-3 px-6 rounded w-full md:w-auto">
             Save and pay now
