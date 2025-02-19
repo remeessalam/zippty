@@ -9,6 +9,7 @@ import ReactPlayer from "react-player";
 import { FaPlay } from "react-icons/fa";
 import Testimonials from "../Component /Testimonials";
 import aboutuspetsimage from "../assets/images/aboutuspetsimage.png";
+import AboutStore from "../Component /AboutStore";
 
 const AboutPage = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -19,9 +20,9 @@ const AboutPage = () => {
     setIsPlaying(false);
   };
   const aboutBannerDetails = {
-    mainHeading: "The smarter way to shop for your pet",
-    paragraph: `At Zippty, we know your pets are more than just animals—they're
-    family. Whether you have a curious kitten or an energetic dog,`,
+    mainHeading: "Welcome to Zippty – Where Your Pets’ Happiness Comes First",
+    paragraph: `At Zippty, we know your pets are more than just animals—they’re family. Whether you have a curious kitten or an energetic dog, we’re here to offer everything you need to ensure they’re well cared for. From nutritious food and interactive toys to cozy beds and grooming essentials, we’ve got a wide range of products to meet the unique needs of both cats and dogs.
+`,
     image: aboutuspetsimage,
     isButton: true,
   };
@@ -53,6 +54,7 @@ const AboutPage = () => {
       <Experience />
       <WhyChooseUs />
       <OurMission />
+      <AboutStore />
       <OurTeam />
       <div className="wrapper paddingTop paddingBottom">
         <div className="relative w-full max-w-4xl mx-auto rounded-3xl overflow-hidden">
