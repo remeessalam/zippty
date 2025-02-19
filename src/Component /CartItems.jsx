@@ -4,29 +4,12 @@ import { RxCross2 } from "react-icons/rx";
 import { BsCart3 } from "react-icons/bs";
 import { useCart } from "../Store/cartContext";
 import { Link } from "react-router-dom";
-import { useEffect, useState, useRef } from "react";
+import { useRef } from "react";
 import bird from "../assets/images/bird.gif";
 
 const CartItems = () => {
   const { cartItems, removeFromCart } = useCart();
   const buttonRef = useRef(null);
-  // const [birdPosition, setBirdPosition] = useState({ x: "80vw", y: "80vh" });
-
-  // useEffect(() => {
-  //   if (buttonRef.current) {
-  //     const buttonRect = buttonRef.current.getBoundingClientRect();
-
-  //     // Set bird position slightly above the button
-  //     const birdX = `${buttonRect.left + window.scrollX}px`;
-  //     const birdY = `${buttonRect.top + window.scrollY - 50}px`; // Adjusted to stay above
-
-  //     setBirdPosition({ x: birdX, y: birdY });
-
-  //     // Apply new CSS variables dynamically for animation to target button position
-  //     document.documentElement.style.setProperty("--target-x", birdX);
-  //     document.documentElement.style.setProperty("--target-y", birdY);
-  //   }
-  // }, [cartItems]);
 
   const calculateTotal = () => {
     return cartItems.reduce(
@@ -63,37 +46,39 @@ const CartItems = () => {
       <div className="overflow-x-auto">
         <table className="w-full border-collapse">
           <thead>
-            <tr className="border-b">
-              <th className="text-left p-4">PRODUCT</th>
-              <th className="text-left p-4">PRICE</th>
-              <th className="text-left p-4">QUANTITY</th>
-              <th className="text-left p-4">TOTAL</th>
-              <th className="text-left p-4">EDIT</th>
+            <tr className="border-b bg-gray-100">
+              <th className="text-left px-6 py-4 min-w-[200px]">PRODUCT</th>
+              <th className="text-center px-6 py-4 min-w-[150px]">PRICE</th>
+              <th className="text-center px-6 py-4 min-w-[100px]">QUANTITY</th>
+              <th className="text-center px-6 py-4 min-w-[150px]">TOTAL</th>
+              <th className="text-center px-6 py-4 min-w-[100px]">EDIT</th>
             </tr>
           </thead>
           <tbody>
             {cartItems.map((item) => (
               <tr key={item.id} className="border-b">
-                <td className="p-4">
+                <td className="px-6 py-4">
                   <div className="flex items-center gap-4">
                     <img
                       src={item.image || "/placeholder.svg"}
                       alt={item.name}
-                      className="w-16 h-16 object-cover"
+                      className="w-16 h-16 object-cover rounded"
                     />
-                    <span>{item.name}</span>
+                    <span className="whitespace-nowrap">{item.name}</span>
                   </div>
                 </td>
-                <td className="p-4">${item?.price?.toFixed(2)}</td>
-                <td className="p-4">
-                  <div className="border text-center w-fit mr-auto px-8 py-1 rounded-xl">
+                <td className="px-6 py-4 text-center whitespace-nowrap">
+                  ${item?.price?.toFixed(2)}
+                </td>
+                <td className="px-6 py-4 text-center">
+                  <div className="border text-center px-6 py-1 rounded-xl">
                     {item.quantity}
                   </div>
                 </td>
-                <td className="p-4">
+                <td className="px-6 py-4 text-center whitespace-nowrap">
                   ${(item?.price * item?.quantity)?.toFixed(2)}
                 </td>
-                <td className="p-4">
+                <td className="px-6 py-4 text-center">
                   <button
                     onClick={() => removeFromCart(item.id)}
                     className="text-black hover:text-gray-700"
