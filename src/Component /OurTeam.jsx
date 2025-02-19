@@ -3,7 +3,7 @@ import { ourTeam } from "../util/contant";
 
 const OurTeam = () => {
   return (
-    <div>
+    <div className="paddingTop paddingBottom">
       <div className="wrapper">
         <div>
           <h1 className="title-heading text-center">Our Team</h1>

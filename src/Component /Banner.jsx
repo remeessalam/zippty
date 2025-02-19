@@ -1,7 +1,8 @@
 import backgroundbg from "../assets/images/imagebg.png";
 import homebackgroundbg from "../assets/images/homebg.png";
+import { Link } from "react-router-dom";
 const Banner = ({ bannerDetails }) => {
-  const { mainHeading, paragraph, image, isHome } = bannerDetails;
+  const { mainHeading, paragraph, image, isHome, isButton } = bannerDetails;
   return (
     <div className="relative">
       <div className="wrapper grid md:grid-cols-2 px-6 py-16 items">
@@ -17,9 +18,14 @@ const Banner = ({ bannerDetails }) => {
               {mainHeading}{" "}
             </h1>
             <p className="text-gray-600 max-w-md">{paragraph}</p>
-            <button className="bg-black w-fit text-white px-8 py-3 rounded-md hover:bg-gray-800 transition-colors">
-              Shop Now
-            </button>
+            {isButton && (
+              <Link
+                to={"/shop"}
+                className="bg-black w-fit text-white px-8 py-3 rounded-md hover:bg-gray-800 transition-colors"
+              >
+                Shop Now
+              </Link>
+            )}
           </div>
         </div>
 

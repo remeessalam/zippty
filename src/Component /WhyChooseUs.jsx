@@ -3,7 +3,7 @@ import whychooseus from "../assets/images/whychooseus.jpeg";
 import { petCareFeatures } from "../util/contant";
 const WhyChooseUs = () => {
   return (
-    <div>
+    <div className="paddingTop paddingBottom">
       <div className="wrapper">
         <div className="grid md:grid-cols-2 gap-8">
           <div className="h-full">

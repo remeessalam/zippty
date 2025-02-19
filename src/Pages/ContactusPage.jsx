@@ -10,6 +10,7 @@ const ContactusPage = () => {
     paragraph: `Have a question about our products? Need help with your order? We're ready to assist you.`,
     image: contactuspetimage,
     isHome: false,
+    isButton: true,
   };
   return (
     <div>

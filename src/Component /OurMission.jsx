@@ -1,7 +1,7 @@
 import ourmission from "../assets/images/ourmission.jpeg";
 const OurMission = () => {
   return (
-    <div>
+    <div className="paddingTop paddingBottom">
       <div className="wrapper ">
         <div className="grid md:grid-cols-2 items-center justify-items-center min-h-[40vh]">
           <div>

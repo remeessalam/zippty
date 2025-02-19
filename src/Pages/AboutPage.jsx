@@ -15,19 +15,23 @@ const AboutPage = () => {
   const togglePlayPause = () => {
     setIsPlaying(!isPlaying);
   };
+  const handleVideoEnd = () => {
+    setIsPlaying(false);
+  };
   const aboutBannerDetails = {
     mainHeading: "The smarter way to shop for your pet",
     paragraph: `At Zippty, we know your pets are more than just animals—they're
     family. Whether you have a curious kitten or an energetic dog,`,
     image: aboutuspetsimage,
+    isButton: true,
   };
   return (
     <div>
       <Banner bannerDetails={aboutBannerDetails} />
-      <div className="wrapper">
+      <div className="wrapper paddingTop paddingBottom">
         <h2 className="title-heading">About our store</h2>
-        <div className="grid md:grid-cols-2">
-          <p className="mt-3">
+        <div className="grid md:grid-cols-2 mt-8 md:gap-10 gap-5">
+          <p className="">
             At Zippty, we understand that pets are more than just
             animals—they're cherished members of the family. Our passion for
             animals drives us to provide top-quality pet care products that help
@@ -50,30 +54,34 @@ const AboutPage = () => {
       <WhyChooseUs />
       <OurMission />
       <OurTeam />
-      <div className="wrapper">
+      <div className="wrapper paddingTop paddingBottom">
         <div className="relative w-full max-w-4xl mx-auto rounded-3xl overflow-hidden">
-          {/* Video Player */}
           <ReactPlayer
             url={aboutvideo}
             playing={isPlaying}
             controls={false}
-            muted={true}
+            muted={false}
             width="100%"
             height="100%"
             className="aspect-video"
             onClick={togglePlayPause}
+            onEnded={handleVideoEnd}
           />
 
-          {/* Play/Pause Button Overlay */}
-          {!isPlaying && (
+          {!isPlaying ? (
             <div
-              className="absolute inset-0 flex items-center justify-center cursor-pointer"
+              className="absolute inset-0 flex items-center justify-center cursor-pointer bg-black/40"
               onClick={togglePlayPause}
             >
               <div className="w-16 h-16 bg-orange-500 rounded-full flex justify-center items-center">
                 <FaPlay className="text-white w-8 h-8" />
               </div>
             </div>
+          ) : (
+            <div
+              className="absolute inset-0 flex items-center justify-center cursor-pointer bg-black/10"
+              onClick={togglePlayPause}
+            />
           )}
         </div>
       </div>

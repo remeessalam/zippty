@@ -62,7 +62,7 @@ const Experience = () => {
   }, [inView]);
 
   return (
-    <div className="pt-[3rem]">
+    <div className="paddingTop paddingBottom">
       <div
         ref={ref}
         data-aos-offset={-200}
