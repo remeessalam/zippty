@@ -6,7 +6,7 @@ const Banner = ({ bannerDetails }) => {
   return (
     <div className="relative">
       <div className="wrapper grid md:grid-cols-2 px-6 py-16 items">
-        <div className="w-full relative min-h-[50vh]">
+        <div className="w-full relative">
           <img
             src={backgroundbg}
             alt="bgimage"

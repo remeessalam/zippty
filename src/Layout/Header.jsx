@@ -122,7 +122,7 @@ const Header = () => {
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="p-6">
+        <div className="p-6 bg-white h-screen">
           <button className="mb-6" onClick={toggleMenu}>
             <FaTimes size={24} />
           </button>
