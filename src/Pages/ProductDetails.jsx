@@ -10,10 +10,12 @@ import { useCart } from "../Store/cartContext";
 import { Link } from "react-router-dom";
 
 const ProductDetails = () => {
-  const { addToCart, cartItems } = useCart(); // Get cartItems and addToCart
+  const { addToCart, cartItems } = useCart();
   const [quantity, setQuantity] = useState(1);
+  const product = productDetails[0];
 
-  const product = productDetails[0]; // Select the first product (replace with dynamic selection if needed)
+  // State to track selected image
+  const [selectedImage, setSelectedImage] = useState(product.productImage);
 
   const decreaseQuantity = () => {
     if (quantity > 1) setQuantity(quantity - 1);
@@ -33,7 +35,6 @@ const ProductDetails = () => {
     });
   };
 
-  // Check if product is already in the cart
   const isInCart = cartItems.some((item) => item.id === product.id);
 
   const aboutBannerDetails = {
@@ -57,10 +58,24 @@ const ProductDetails = () => {
             {/* Product Images */}
             <div className="space-y-4">
               <img
-                src={product.productImage}
+                src={selectedImage}
                 alt={product.productName}
                 className="w-full rounded-lg"
               />
+              {/* Thumbnails */}
+              <div className="flex gap-4">
+                {[product.productImage, ...product.images].map((img, i) => (
+                  <img
+                    key={i}
+                    src={img}
+                    alt={`Thumbnail ${i}`}
+                    className={`w-20 h-20 rounded-lg cursor-pointer border ${
+                      selectedImage === img ? "border-black" : "border-gray-300"
+                    }`}
+                    onClick={() => setSelectedImage(img)}
+                  />
+                ))}
+              </div>
             </div>
 
             {/* Product Details */}
@@ -138,7 +153,7 @@ const ProductDetails = () => {
             <div>
               <div className="space-y-4">
                 <img
-                  src={product.productImage}
+                  src={selectedImage}
                   alt={product.productName}
                   className="w-full rounded-lg"
                 />
@@ -147,12 +162,13 @@ const ProductDetails = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {product.images.map((obj, i) => (
+            {product.images.map((img, i) => (
               <img
                 key={i}
-                src={obj}
+                src={img}
                 alt="product-image"
-                className="rounded-3xl"
+                className="rounded-3xl cursor-pointer"
+                onClick={() => setSelectedImage(img)}
               />
             ))}
           </div>
