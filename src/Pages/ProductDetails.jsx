@@ -46,7 +46,7 @@ const ProductDetails = () => {
   return (
     <div>
       <Banner bannerDetails={aboutBannerDetails} />
-      <CategorySlider />
+      {/* <CategorySlider /> */}
 
       <div className=" gap-8 wrapper">
         {/* Left Sidebar */}

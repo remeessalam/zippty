@@ -19,7 +19,7 @@ const HomePage = () => {
   return (
     <div>
       <Banner bannerDetails={homeBannerDetails} />
-      <CategorySlider />
+      {/* <CategorySlider /> */}
       <FeaturedProducts />
       <HomeAbout />
       <div>

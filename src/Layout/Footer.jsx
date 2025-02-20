@@ -85,9 +85,9 @@ const Footer = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Company Info */}
-          <div className="lg:col-span-2">
+          <div className="">
             <h2 className="text-2xl font-bold mb-4">Zippty</h2>
             <p className="text-gray-600 mb-6 max-w-[18rem]">
               At Zippty, we know your pets are more than just animals—they're
@@ -110,7 +110,7 @@ const Footer = () => {
           </div>
 
           {/* Company Links */}
-          <div>
+          <div className="flex flex-col items-start">
             <h3 className="font-semibold text-lg mb-4">Company</h3>
             <ul className="space-y-2">
               <li>
@@ -143,7 +143,7 @@ const Footer = () => {
           </div>
 
           {/* Useful Links */}
-          <div>
+          {/* <div>
             <h3 className="font-semibold text-lg mb-4">Useful Links</h3>
             <ul className="space-y-2">
               <li>
@@ -167,8 +167,8 @@ const Footer = () => {
                 </aLink>
               </li>
             </ul>
-          </div>
-          <div>
+          </div> */}
+          {/* <div>
             <h3 className="font-semibold text-lg mb-4">Customer Service</h3>
             <ul className="space-y-2">
               <li>
@@ -187,7 +187,7 @@ const Footer = () => {
                 </Link>
               </li>
             </ul>
-          </div>
+          </div> */}
 
           {/* Store Info */}
           <div>

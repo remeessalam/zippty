@@ -14,7 +14,7 @@ const ProductsPage = () => {
   return (
     <div>
       <Banner bannerDetails={aboutBannerDetails} />
-      <CategorySlider />
+      {/* <CategorySlider /> */}
       <AllProducts />
       <TwoDogs />
     </div>
