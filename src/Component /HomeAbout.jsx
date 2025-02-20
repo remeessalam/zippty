@@ -1,6 +1,7 @@
 import React from "react";
 import homeaboutsection from "../assets/images/homeaboutsection.png";
 import homepagecompanylogos from "../assets/images/homepagecompanylogos.png";
+import { Link } from "react-router-dom";
 const HomeAbout = () => {
   return (
     <div className="paddingTop paddingBottom">
@@ -19,9 +20,12 @@ const HomeAbout = () => {
               range of interactive toys and robots designed to engage, excite,
               and enrich your furry friend's life.
             </p>
-            <button className="bg-black w-fit text-white px-8 py-3 rounded-md hover:bg-gray-800 transition-colors">
+            <Link
+              to={"/about-us"}
+              className="bg-black w-fit text-white px-8 py-3 rounded-md hover:bg-gray-800 transition-colors"
+            >
               Learn More
-            </button>
+            </Link>
           </div>
         </div>
         <img src={homepagecompanylogos} alt="" />
