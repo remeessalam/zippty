@@ -28,10 +28,10 @@ const AllProducts = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <ProductFilters />
-        <main className="md:col-span-3">
-          <div className="flex items-center justify-between mb-6">
+      <div className="grid  gap-8">
+        {/* <ProductFilters /> */}
+        <main className="lg:col-span-4">
+          {/* <div className="flex items-center justify-between mb-6">
             <p className="text-sm text-gray-500">Showing 12-12 of 14 results</p>
             <select className="border rounded-md px-3 py-1.5 text-sm">
               <option>Sort by latest</option>
@@ -39,8 +39,8 @@ const AllProducts = () => {
               <option>Price: High to Low</option>
               <option>Sort by popularity</option>
             </select>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          </div> */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {products.map((product) => (
               <div
                 key={product.title}

@@ -48,9 +48,9 @@ const ProductDetails = () => {
       <Banner bannerDetails={aboutBannerDetails} />
       <CategorySlider />
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8 wrapper">
+      <div className=" gap-8 wrapper">
         {/* Left Sidebar */}
-        <ProductFilters />
+        {/* <ProductFilters /> */}
 
         {/* Main Content */}
         <div className="flex-1 md:col-span-3 ">
