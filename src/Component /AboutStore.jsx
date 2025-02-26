@@ -11,7 +11,7 @@ const AboutStore = () => {
   return (
     <div className="font-sans bg-gray-50 text-gray-800">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-orange-500 to-orange-300 text-white py-20 px-4 text-center">
+      <div className="bg-gradient-to-r from-blue-500 to-primary text-white py-20 px-4 text-center">
         <h1 className="text-5xl font-bold mb-4">
           Be Part of the Zippty Family
         </h1>
@@ -144,7 +144,7 @@ const AboutStore = () => {
       </div>
 
       {/* CTA Section */}
-      <div className="bg-gradient-to-r from-primary to-orange-300 text-white py-20 px-4 text-center">
+      <div className="bg-gradient-to-r from-primary to-blue-300 text-white py-20 px-4 text-center">
         <h2 className="text-4xl font-bold mb-4">
           Start Shopping with Zippty Today!
         </h2>

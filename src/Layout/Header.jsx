@@ -75,10 +75,8 @@ const Header = () => {
             <Link
               key={link.path}
               to={link.path}
-              className={`hover:text-[#FF7629] ${
-                location.pathname === link.path
-                  ? "text-[#FF7629]"
-                  : "text-black"
+              className={`hover:text-primary ${
+                location.pathname === link.path ? "text-primary" : "text-black"
               }`}
             >
               {link.label}
@@ -100,13 +98,13 @@ const Header = () => {
           <div className="flex items-center gap-4">
             <Link to={"/wishlist"} className="relative">
               <FaHeart size={24} />
-              <span className="absolute -top-2 -right-2 bg-[#FF7629] text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+              <span className="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                 {wishlist.length}
               </span>
             </Link>
             <Link to={"/cartitems"} className="relative mr-3">
               <FaShoppingCart size={24} />
-              <span className="absolute -top-2 -right-2 bg-[#FF7629] text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+              <span className="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                 {cartItems.length}
               </span>
             </Link>
