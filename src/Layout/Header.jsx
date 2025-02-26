@@ -13,7 +13,7 @@ import { Link, useLocation } from "react-router-dom";
 import { navLinks } from "../util/contant";
 import { useWishlist } from "../Store/wishlistContext";
 import { useCart } from "../Store/cartContext";
-
+import logo from "../assets/images/logo/logo.png";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
@@ -65,7 +65,9 @@ const Header = () => {
 
       {/* Main navigation */}
       <nav className="bg-white flex items-center justify-between px-16 py-4 wrapper rounded-full shadow-xl">
-        <div className="text-xl font-bold ml-3">Zippty</div>
+        <div className="text-xl font-bold ml-3">
+          <img src={logo} alt="logo" className="w-[4.5rem] sm:w-[6rem]" />
+        </div>
 
         {/* Desktop Navigation Links */}
         <div className="hidden md:flex items-center space-x-8">
