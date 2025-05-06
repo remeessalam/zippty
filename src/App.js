@@ -7,6 +7,9 @@ import CartPage from "./Pages/CartPage";
 import ProductPage from "./Pages/ProductsPage";
 import ProductDetails from "./Pages/ProductDetails";
 import WishlistPage from "./Pages/WishlistPage";
+import { AdminLayout } from "./Admin/AdminLayout/AdminLayout";
+import AdminHome from "./Admin/AdminPage/AdminHome";
+import AdminAllProducts from "./Admin/AdminPage/AdminAllProducts";
 
 const AppRouter = createBrowserRouter([
   {
@@ -20,6 +23,14 @@ const AppRouter = createBrowserRouter([
       { path: "/shop", element: <ProductPage /> },
       { path: "/product", element: <ProductDetails /> },
       { path: "/wishlist", element: <WishlistPage /> },
+    ],
+  },
+  {
+    path: "/admin",
+    element: <AdminLayout />,
+    children: [
+      { path: "/admin", element: <AdminHome /> },
+      { path: "/admin/all-products", element: <AdminAllProducts /> },
     ],
   },
 ]);

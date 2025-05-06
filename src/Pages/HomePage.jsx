@@ -1,7 +1,7 @@
 import React from "react";
 import Banner from "../Component /Banner";
 import homepagepetsimage from "../assets/images/homepagepetsimage.png";
-import CategorySlider from "../Component /CategorySlider";
+// import CategorySlider from "../Component /CategorySlider";
 import FeaturedProducts from "../Component /FeaturedProducts";
 import HomeAbout from "../Component /HomeAbout";
 import Testimonials from "../Component /Testimonials";
