@@ -10,6 +10,7 @@ import WishlistPage from "./Pages/WishlistPage";
 import { AdminLayout } from "./Admin/AdminLayout/AdminLayout";
 import AdminHome from "./Admin/AdminPage/AdminHome";
 import AdminAllProducts from "./Admin/AdminPage/AdminAllProducts";
+import AdminOrderList from "./Admin/AdminPage/AdminOrderList";
 
 const AppRouter = createBrowserRouter([
   {
@@ -31,6 +32,7 @@ const AppRouter = createBrowserRouter([
     children: [
       { path: "/admin", element: <AdminHome /> },
       { path: "/admin/all-products", element: <AdminAllProducts /> },
+      { path: "/admin/order-list", element: <AdminOrderList /> },
     ],
   },
 ]);
