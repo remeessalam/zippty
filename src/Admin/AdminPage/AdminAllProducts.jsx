@@ -2,6 +2,7 @@ import { useState } from "react";
 import productimage from "../../assets/images/products/wireless-remote-control.jpeg";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { FaArrowUp } from "react-icons/fa";
+import { Link } from "react-router-dom";
 const AdminAllProducts = () => {
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
@@ -27,9 +28,12 @@ const AdminAllProducts = () => {
             All Products
           </span>
         </div>
-        <button className="bg-indigo-700 text-white px-4 py-2 rounded-md flex items-center">
+        <Link
+          to={"/admin/add-product"}
+          className="bg-primary text-white px-4 py-2 rounded-md flex items-center"
+        >
           <span className="mr-2">+</span> ADD NEW PRODUCT
-        </button>
+        </Link>
       </div>
 
       {/* Product grid */}

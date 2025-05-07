@@ -11,6 +11,8 @@ import { AdminLayout } from "./Admin/AdminLayout/AdminLayout";
 import AdminHome from "./Admin/AdminPage/AdminHome";
 import AdminAllProducts from "./Admin/AdminPage/AdminAllProducts";
 import AdminOrderList from "./Admin/AdminPage/AdminOrderList";
+import AdminOrderDetails from "./Admin/AdminPage/AdminOrderDetails";
+import AdminAddProduct from "./Admin/AdminPage/AdminAddProduct";
 
 const AppRouter = createBrowserRouter([
   {
@@ -33,6 +35,9 @@ const AppRouter = createBrowserRouter([
       { path: "/admin", element: <AdminHome /> },
       { path: "/admin/all-products", element: <AdminAllProducts /> },
       { path: "/admin/order-list", element: <AdminOrderList /> },
+      { path: "/admin/order-details/:id", element: <AdminOrderDetails /> },
+      { path: "/admin/add-product", element: <AdminAddProduct /> },
+      { path: "/admin/edit-product/:id", element: <AdminAddProduct /> },
     ],
   },
 ]);
