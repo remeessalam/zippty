@@ -13,6 +13,7 @@ const Chart = () => {
         backgroundColor: "rgba(79, 70, 229, 0.1)",
         tension: 0.4,
         fill: false,
+        width: "100%",
       },
     ],
   };
@@ -53,11 +54,11 @@ const Chart = () => {
       },
     },
   };
+
   return (
-    <div className="max-w-screen">
-      {" "}
+    <div className="max-w-full">
       <div className="bg-white rounded-md p-6 mb-6">
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex md:flex-row flex-col justify-between items-center mb-6">
           <h2 className="text-lg font-bold">Sale Graph</h2>
           <div className="flex space-x-2">
             <button
@@ -92,7 +93,7 @@ const Chart = () => {
             </button>
           </div>
         </div>
-        <div className="h-64 w-full">
+        <div className=" h-full min-h-[15rem]   w-full flex justify-center">
           <Line data={chartData} options={chartOptions} />
         </div>
       </div>
