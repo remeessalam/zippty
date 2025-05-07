@@ -54,7 +54,7 @@ const Chart = () => {
     },
   };
   return (
-    <div>
+    <div className="max-w-screen">
       {" "}
       <div className="bg-white rounded-md p-6 mb-6">
         <div className="flex justify-between items-center mb-6">

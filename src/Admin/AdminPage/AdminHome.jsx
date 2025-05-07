@@ -32,14 +32,14 @@ ChartJS.register(
 
 const AdminHome = () => {
   return (
-    <div className="flex h-full bg-gray-50">
+    <div className="flex wrapper h-full bg-gray-50">
       {/* Main Content */}
       {/* <SideBar /> */}
-      <div className="flex-1 flex flex-col ">
+      <div className="flex w-full  flex-col ">
         {/* Top Navigation */}
 
         {/* Dashboard Content */}
-        <main className="flex-1  p-4 bg-gray-50">
+        <main className="flex-1  p-4 bg-gray-50 ">
           <div className="mb-6">
             <h1 className="text-2xl font-bold mb-1">Dashboard</h1>
             <div className="flex justify-between items-center">
