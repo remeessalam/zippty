@@ -7,6 +7,8 @@ import CartPage from "./Pages/CartPage";
 import ProductPage from "./Pages/ProductsPage";
 import ProductDetails from "./Pages/ProductDetails";
 import WishlistPage from "./Pages/WishlistPage";
+import PrivacyPolicyPage from "./Pages/PrivacyPolicyPage";
+import TermsConditionsPage from "./Pages/TermsConditionsPage";
 import { AdminLayout } from "./Admin/AdminLayout/AdminLayout";
 import AdminHome from "./Admin/AdminPage/AdminHome";
 import AdminAllProducts from "./Admin/AdminPage/AdminAllProducts";
@@ -26,6 +28,8 @@ const AppRouter = createBrowserRouter([
       { path: "/shop", element: <ProductPage /> },
       { path: "/product", element: <ProductDetails /> },
       { path: "/wishlist", element: <WishlistPage /> },
+      { path: "/privacy-policy", element: <PrivacyPolicyPage /> },
+      { path: "/terms-conditions", element: <TermsConditionsPage /> },
     ],
   },
   {

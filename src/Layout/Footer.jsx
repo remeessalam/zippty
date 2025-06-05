@@ -276,6 +276,22 @@ const Footer = () => {
                   Shop
                 </Link>
               </li>
+              <li>
+                <Link
+                  to="/privacy-policy"
+                  className="text-gray-600 hover:text-gray-900"
+                >
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/terms-conditions"
+                  className="text-gray-600 hover:text-gray-900"
+                >
+                  Terms & Conditions
+                </Link>
+              </li>
             </ul>
           </div>
 
