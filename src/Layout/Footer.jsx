@@ -292,6 +292,22 @@ const Footer = () => {
                   Terms & Conditions
                 </Link>
               </li>
+              <li>
+                <Link
+                  to="/cancellation-refund"
+                  className="text-gray-600 hover:text-gray-900"
+                >
+                  Cancellation & Refund
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/shipping-delivery"
+                  className="text-gray-600 hover:text-gray-900"
+                >
+                  Shipping & Delivery
+                </Link>
+              </li>
             </ul>
           </div>
 

@@ -9,6 +9,8 @@ import ProductDetails from "./Pages/ProductDetails";
 import WishlistPage from "./Pages/WishlistPage";
 import PrivacyPolicyPage from "./Pages/PrivacyPolicyPage";
 import TermsConditionsPage from "./Pages/TermsConditionsPage";
+import CancellationRefundPage from "./Pages/CancellationRefundPage";
+import ShippingDeliveryPage from "./Pages/ShippingDeliveryPage";
 import { AdminLayout } from "./Admin/AdminLayout/AdminLayout";
 import AdminHome from "./Admin/AdminPage/AdminHome";
 import AdminAllProducts from "./Admin/AdminPage/AdminAllProducts";
@@ -30,6 +32,8 @@ const AppRouter = createBrowserRouter([
       { path: "/wishlist", element: <WishlistPage /> },
       { path: "/privacy-policy", element: <PrivacyPolicyPage /> },
       { path: "/terms-conditions", element: <TermsConditionsPage /> },
+      { path: "/cancellation-refund", element: <CancellationRefundPage /> },
+      { path: "/shipping-delivery", element: <ShippingDeliveryPage /> },
     ],
   },
   {
