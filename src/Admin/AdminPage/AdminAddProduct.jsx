@@ -1,44 +1,108 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import productimage from "../../assets/images/products/wireless-remote-control.jpeg";
+import { useParams, useNavigate } from "react-router-dom";
+import { useForm, useFieldArray } from "react-hook-form";
+import { addProduct, fetchProduct, updateProduct } from "../Api/product";
+import axios from "axios";
+import { FaChevronRight } from "react-icons/fa";
 
 const AdminAddProduct = () => {
   const { id } = useParams();
   const isEditMode = Boolean(id);
-
-  const [productData, setProductData] = useState({
-    name: "",
-    description: "",
-    category: "",
-    brand: "",
-    sku: "",
-    stock: "",
-    regularPrice: "",
-    salePrice: "",
-    tags: ["Lorem", "Lorem"],
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    control,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      name: "BABORUI 3.0 Upgraded Interactive Cat Toy with 2-Speed Adjustment, Remote Control, Automatic, Orange",
+      description: "",
+      image: "",
+      thumbnailUrls: [""],
+      headings: [{ title: "", description: "" }],
+      about: [""],
+    },
   });
 
-  const [thumbnails, setThumbnails] = useState([
-    { id: 1, name: "Product thumbnail.png", selected: true },
-    { id: 2, name: "Product thumbnail.png", selected: true },
-    { id: 3, name: "Product thumbnail.png", selected: true },
-    { id: 4, name: "Product thumbnail.png", selected: true },
-  ]);
+  const {
+    fields: headingFields,
+    append: appendHeading,
+    remove: removeHeading,
+  } = useFieldArray({
+    control,
+    name: "headings",
+  });
+
+  const {
+    fields: aboutFields,
+    append: appendAbout,
+    remove: removeAbout,
+  } = useFieldArray({
+    control,
+    name: "about",
+  });
+
+  const {
+    fields: thumbnailFields,
+    append: appendThumbnail,
+    remove: removeThumbnail,
+  } = useFieldArray({
+    control,
+    name: "thumbnailUrls",
+  });
+
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   useEffect(() => {
     if (isEditMode) {
-      fetch(`/api/products/${id}`)
-        .then((res) => res.json())
+      fetchProduct(id)
         .then((data) => {
-          setProductData(data);
-          setThumbnails(data.thumbnails || []);
-        });
+          const product = data.product;
+          Object.keys(product).forEach((key) => setValue(key, product[key]));
+        })
+        .catch((err) => setError(err.message));
     }
-  }, [id, isEditMode]);
+  }, [id, isEditMode, setValue]);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setProductData({ ...productData, [name]: value });
+  const onSubmit = async (data) => {
+    setError("");
+    setSuccess("");
+    try {
+      if (isEditMode) {
+        await updateProduct(id, data);
+        setSuccess("Product updated successfully");
+      } else {
+        await addProduct(data);
+        setSuccess("Product added successfully");
+      }
+      setTimeout(() => navigate("/admin/products"), 2000);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const handleCancel = () => {
+    navigate("/admin/products");
+  };
+
+  const handleDelete = async () => {
+    if (!window.confirm("Are you sure you want to delete this product?"))
+      return;
+    setError("");
+    setSuccess("");
+    try {
+      const token = localStorage.getItem("token");
+      await axios.delete(`/api/products/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setSuccess("Product deleted successfully");
+      setTimeout(() => navigate("/admin/products"), 2000);
+    } catch (err) {
+      setError(err.response?.data?.message || "Failed to delete product");
+    }
   };
 
   return (
@@ -47,157 +111,210 @@ const AdminAddProduct = () => {
         <h1 className="text-2xl font-bold">
           {isEditMode ? "Edit Product" : "Add Product"}
         </h1>
-        <div className="text-sm text-gray-600">
-          <span>Home</span> &gt; <span>All Products</span> &gt;{" "}
+        <div className="text-sm text-gray-600 flex items-center gap-1">
+          <span>Home</span> <FaChevronRight />
+          <span>All Products</span> <FaChevronRight />
           <span>{isEditMode ? "Edit Product" : "Add Product"}</span>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      {error && <div className="text-red-500 mb-4">{error}</div>}
+      {success && <div className="text-green-500 mb-4">{success}</div>}
+
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="grid grid-cols-1 lg:grid-cols-2 gap-6"
+      >
         <div className="space-y-4">
           <div>
             <label className="block font-medium mb-1">Product Name</label>
             <input
-              type="text"
-              name="name"
-              value={productData.name}
-              onChange={handleInputChange}
+              {...register("name", { required: "Product name is required" })}
               className="w-full border border-gray-300 rounded p-2"
             />
+            {errors.name && (
+              <p className="text-red-500 text-sm">{errors.name.message}</p>
+            )}
           </div>
           <div>
             <label className="block font-medium mb-1">Description</label>
             <textarea
-              name="description"
-              value={productData.description}
-              onChange={handleInputChange}
+              {...register("description")}
               className="w-full border border-gray-300 rounded p-2 h-28"
             />
           </div>
           <div>
-            <label className="block font-medium mb-1">Category</label>
+            <label className="block font-medium mb-1">Main Image URL</label>
             <input
-              type="text"
-              name="category"
-              value={productData.category}
-              onChange={handleInputChange}
+              {...register("image", { required: "Main image URL is required" })}
+              placeholder="Enter main image URL"
               className="w-full border border-gray-300 rounded p-2"
             />
+            {errors.image && (
+              <p className="text-red-500 text-sm">{errors.image.message}</p>
+            )}
           </div>
           <div>
-            <label className="block font-medium mb-1">Brand Name</label>
-            <input
-              type="text"
-              name="brand"
-              value={productData.brand}
-              onChange={handleInputChange}
-              className="w-full border border-gray-300 rounded p-2"
-            />
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block font-medium mb-1">SKU</label>
-              <input
-                type="text"
-                name="sku"
-                value={productData.sku}
-                onChange={handleInputChange}
-                className="w-full border border-gray-300 rounded p-2"
-              />
-            </div>
-            <div>
-              <label className="block font-medium mb-1">Stock Quantity</label>
-              <input
-                type="text"
-                name="stock"
-                value={productData.stock}
-                onChange={handleInputChange}
-                className="w-full border border-gray-300 rounded p-2"
-              />
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block font-medium mb-1">Regular Price</label>
-              <input
-                type="text"
-                name="regularPrice"
-                value={productData.regularPrice}
-                onChange={handleInputChange}
-                className="w-full border border-gray-300 rounded p-2"
-              />
-            </div>
-            <div>
-              <label className="block font-medium mb-1">Sale Price</label>
-              <input
-                type="text"
-                name="salePrice"
-                value={productData.salePrice}
-                onChange={handleInputChange}
-                className="w-full border border-gray-300 rounded p-2"
-              />
-            </div>
-          </div>
-          <div>
-            <label className="block font-medium mb-1">Tags</label>
-            <div className="border border-gray-300 rounded p-2 min-h-12">
-              <div className="flex flex-wrap gap-2">
-                {productData.tags.map((tag, index) => (
-                  <span
-                    key={index}
-                    className="bg-primary text-white px-3 py-1 rounded-full text-sm"
+            <label className="block font-medium mb-1">Headings</label>
+            {headingFields.map((field, index) => (
+              <div key={field.id} className="space-y-2 mb-2">
+                <input
+                  {...register(`headings.${index}.title`, {
+                    required: "Title is required",
+                  })}
+                  placeholder="Heading Title"
+                  className="w-full border border-gray-300 rounded p-2"
+                />
+                {errors.headings?.[index]?.title && (
+                  <p className="text-red-500 text-sm">
+                    {errors.headings[index].title.message}
+                  </p>
+                )}
+                <textarea
+                  {...register(`headings.${index}.description`, {
+                    required: "Description is required",
+                  })}
+                  placeholder="Heading Description"
+                  className="w-full border border-gray-300 rounded p-2 h-20"
+                />
+                {errors.headings?.[index]?.description && (
+                  <p className="text-red-500 text-sm">
+                    {errors.headings[index].description.message}
+                  </p>
+                )}
+                {headingFields.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={() => removeHeading(index)}
+                    className="text-red-500 text-sm"
                   >
-                    {tag}
-                  </span>
-                ))}
+                    Remove Heading
+                  </button>
+                )}
               </div>
-            </div>
+            ))}
+            <button
+              type="button"
+              onClick={() => appendHeading({ title: "", description: "" })}
+              className="text-blue-500 text-sm"
+            >
+              Add Heading
+            </button>
+          </div>
+          <div>
+            <label className="block font-medium mb-1">About Points</label>
+            {aboutFields.map((field, index) => (
+              <div key={field.id} className="flex items-center space-x-2 mb-2">
+                <input
+                  {...register(`about.${index}`, {
+                    required: "Point is required",
+                  })}
+                  placeholder="Enter about point"
+                  className="w-full border border-gray-300 rounded p-2"
+                />
+                {errors.about?.[index] && (
+                  <p className="text-red-500 text-sm">
+                    {errors.about[index].message}
+                  </p>
+                )}
+                {aboutFields.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={() => removeAbout(index)}
+                    className="text-red-500 text-sm"
+                  >
+                    Remove
+                  </button>
+                )}
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={() => appendAbout("")}
+              className="text-blue-500 text-sm"
+            >
+              Add Point
+            </button>
           </div>
         </div>
 
         <div className="space-y-4">
           <div className="border border-gray-300 rounded-lg overflow-hidden bg-gray-100">
             <img
-              src={productimage}
+              src={thumbnailFields[0]?.url || "https://via.placeholder.com/300"}
               alt="Product"
               className="w-full h-72 object-contain"
             />
           </div>
-          <div className="space-y-2">
-            {thumbnails.map((thumbnail) => (
-              <div
-                key={thumbnail.id}
-                className="flex items-center bg-gray-100 rounded-lg p-2"
-              >
-                <div className="w-12 h-12 bg-gray-300 rounded mr-3">
+          <div>
+            <label className="block font-medium mb-1">Thumbnail URLs</label>
+            {thumbnailFields.map((field, index) => (
+              <div key={field.id} className="flex items-center space-x-2 mb-2">
+                <input
+                  {...register(`thumbnailUrls.${index}`, {
+                    required: "Thumbnail URL is required",
+                  })}
+                  placeholder="Enter thumbnail URL"
+                  className="w-full border border-gray-300 rounded p-2"
+                />
+                {errors.thumbnailUrls?.[index] && (
+                  <p className="text-red-500 text-sm">
+                    {errors.thumbnailUrls[index].message}
+                  </p>
+                )}
+                <div className="w-12 h-12 bg-gray-300 rounded">
                   <img
-                    src={productimage}
+                    src={field.url || "https://via.placeholder.com/50"}
                     alt="Thumbnail"
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="flex-grow">
-                  <div className="text-sm">{thumbnail.name}</div>
-                </div>
+                {thumbnailFields.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={() => removeThumbnail(index)}
+                    className="text-red-500 text-sm"
+                  >
+                    Remove
+                  </button>
+                )}
               </div>
             ))}
+            <button
+              type="button"
+              onClick={() => appendThumbnail("")}
+              className="text-blue-500 text-sm"
+            >
+              Add Thumbnail URL
+            </button>
           </div>
         </div>
-      </div>
 
-      <div className="flex justify-end gap-4 mt-8">
-        <button className="bg-black text-white px-6 py-2 rounded">
-          {isEditMode ? "UPDATE" : "ADD"}
-        </button>
-        {isEditMode && (
-          <button className="bg-blue-800 text-white px-6 py-2 rounded">
-            DELETE
+        <div className="flex justify-end gap-4 mt-8 col-span-2">
+          <button
+            type="submit"
+            className="bg-black text-white px-6 py-2 rounded"
+          >
+            {isEditMode ? "UPDATE" : "ADD"}
           </button>
-        )}
-        <button className="border border-gray-300 px-6 py-2 rounded">
-          CANCEL
-        </button>
-      </div>
+          {isEditMode && (
+            <button
+              type="button"
+              onClick={handleDelete}
+              className="bg-blue-800 text-white px-6 py-2 rounded"
+            >
+              DELETE
+            </button>
+          )}
+          <button
+            type="button"
+            onClick={handleCancel}
+            className="border border-gray-300 px-6 py-2 rounded"
+          >
+            CANCEL
+          </button>
+        </div>
+      </form>
     </div>
   );
 };
