@@ -17,6 +17,8 @@ import AdminAllProducts from "./Admin/AdminPage/AdminAllProducts";
 import AdminOrderList from "./Admin/AdminPage/AdminOrderList";
 import AdminOrderDetails from "./Admin/AdminPage/AdminOrderDetails";
 import AdminAddProduct from "./Admin/AdminPage/AdminAddProduct";
+import Login from "./Pages/Login";
+import Signup from "./Pages/Signup";
 
 const AppRouter = createBrowserRouter([
   {
@@ -28,7 +30,7 @@ const AppRouter = createBrowserRouter([
       { path: "/contact-us", element: <ContactusPage /> },
       { path: "/cartitems", element: <CartPage /> },
       { path: "/shop", element: <ProductPage /> },
-      { path: "/product", element: <ProductDetails /> },
+      { path: "/product/:id", element: <ProductDetails /> },
       { path: "/wishlist", element: <WishlistPage /> },
       { path: "/privacy-policy", element: <PrivacyPolicyPage /> },
       { path: "/terms-conditions", element: <TermsConditionsPage /> },
@@ -36,6 +38,7 @@ const AppRouter = createBrowserRouter([
       { path: "/shipping-delivery", element: <ShippingDeliveryPage /> },
     ],
   },
+
   {
     path: "/admin",
     element: <AdminLayout />,
@@ -48,6 +51,8 @@ const AppRouter = createBrowserRouter([
       { path: "/admin/edit-product/:id", element: <AdminAddProduct /> },
     ],
   },
+  { path: "/login", element: <Login /> },
+  { path: "/signup", element: <Signup /> },
 ]);
 
 export default AppRouter;

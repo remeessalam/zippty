@@ -22,6 +22,25 @@ body {
   padding: 0;
   background-color: #ffffff;
 }
+
+.thin-scrollbar {
+  scrollbar-width: thin;
+}
+.thin-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+.thin-scrollbar::-webkit-scrollbar-track {
+  background: #ea5d26;
+  border-radius: 4px;
+}
+.thin-scrollbar::-webkit-scrollbar-thumb {
+  background: #ea5d26;
+  border-radius: 4px;
+}
+.thin-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #ea5d26;
+}
 @layer utilities {
   .wrapper {
     @apply max-w-7xl mx-auto px-4;

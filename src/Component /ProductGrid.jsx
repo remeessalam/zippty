@@ -23,10 +23,10 @@ const ProductGrid = ({ products }) => {
             key={product.title}
             className="group relative border rounded-lg overflow-hidden"
           >
-            <Link to="/product">
+            <Link to={`/product/${product._id}`}>
               <div className="aspect-square overflow-hidden">
                 <img
-                  src={product.image || "/placeholder.svg"}
+                  src={product.images[0] || "/placeholder.svg"}
                   alt={product.title}
                   className="w-full h-full object-cover transition-transform group-hover:scale-105"
                 />
@@ -34,7 +34,7 @@ const ProductGrid = ({ products }) => {
               <div className="p-4">
                 <div className="flex justify-between items-center">
                   <h3 className="font-medium text-sm line-clamp-2">
-                    {product.title}
+                    {product.name}
                   </h3>
                   <button
                     onClick={(e) => {
@@ -51,10 +51,10 @@ const ProductGrid = ({ products }) => {
                   </button>
                 </div>
                 <p className="font-bold mt-2">
-                  {!product.stock ? (
+                  {product.stock ? (
                     <span className="text-red-500">Currently unavailable</span>
                   ) : (
-                    `$` + product.price.toFixed(2)
+                    `$` + product.amount.toFixed(2)
                   )}
                 </p>
               </div>

@@ -1,21 +1,48 @@
-import React, { useState } from "react";
-import { productDetails, products } from "../util/productsDetails";
-import productdetailspetsimage from "../assets/images/productdetailspetsimage.png";
-import Banner from "../Component /Banner";
-import CategorySlider from "../Component /CategorySlider";
-import ProductFilters from "../Component /ProductFilters";
-import TwoDogs from "../Component /TwoDogs";
-import ProductGrid from "../Component /ProductGrid";
-import { useCart } from "../Store/cartContext";
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useCart } from "../Store/cartContext";
+
+import productdetailspetsimage from "../assets/images/productdetailspetsimage.png";
+import { addToCart, fetchProducts, getProductById } from "../api/productapi";
+import Banner from "../Component /Banner";
+import ProductGrid from "../Component /ProductGrid";
+import TwoDogs from "../Component /TwoDogs";
 
 const ProductDetails = () => {
-  const { addToCart, cartItems } = useCart();
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { addToCart: addToCartContext, cartItems } = useCart();
   const [quantity, setQuantity] = useState(1);
-  const product = productDetails[0];
+  const [product, setProduct] = useState(null);
+  const [relatedProducts, setRelatedProducts] = useState([]);
+  const [selectedImage, setSelectedImage] = useState("");
+  const [error, setError] = useState("");
 
-  // State to track selected image
-  const [selectedImage, setSelectedImage] = useState(product.productImage);
+  // Fetch product details and related products
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch product by ID
+        const productResponse = await getProductById(id);
+        const fetchedProduct = productResponse.product;
+        setProduct(fetchedProduct);
+        setSelectedImage(fetchedProduct.images[0] || "");
+
+        // Fetch related products
+        const productsResponse = await fetchProducts({ page: 1, limit: 4 });
+        setRelatedProducts(
+          productsResponse.products.filter((p) => p._id !== id)
+        );
+      } catch (err) {
+        console.error("Error fetching product:", err);
+        setError(
+          err.response?.data?.message || "Failed to load product details"
+        );
+      }
+    };
+    fetchData();
+  }, [id]);
 
   const decreaseQuantity = () => {
     if (quantity > 1) setQuantity(quantity - 1);
@@ -25,17 +52,35 @@ const ProductDetails = () => {
     setQuantity(quantity + 1);
   };
 
-  const handleAddToCart = () => {
-    addToCart({
-      id: product.id,
-      name: product.productName,
-      price: product.actualPrice,
-      image: product.productImage,
-      quantity: quantity,
-    });
+  const handleAddToCart = async () => {
+    if (!product) return;
+
+    // Check if user is logged in (assumes token is stored in localStorage)
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+
+    try {
+      // Call backend API to add to cart
+      const response = await addToCart(product._id, quantity);
+      // Update cart context with the response
+      addToCartContext({
+        id: product._id,
+        name: product.name,
+        price: product.amount,
+        image: product.images[0],
+        quantity: quantity,
+      });
+      alert("Product added to cart successfully!");
+    } catch (err) {
+      console.error("Error adding to cart:", err);
+      alert(err.response?.data?.message || "Failed to add product to cart");
+    }
   };
 
-  const isInCart = cartItems.some((item) => item.id === product.id);
+  const isInCart = cartItems.some((item) => item.id === product?._id);
 
   const aboutBannerDetails = {
     mainHeading: "The friendly and caring small pet store",
@@ -43,32 +88,34 @@ const ProductDetails = () => {
     image: productdetailspetsimage,
   };
 
+  if (error) {
+    return <div className="text-red-500 text-center p-4">{error}</div>;
+  }
+
+  if (!product) {
+    return <div className="text-center p-4">Loading...</div>;
+  }
+
   return (
     <div>
       <Banner bannerDetails={aboutBannerDetails} />
-      {/* <CategorySlider /> */}
-
-      <div className=" gap-8 wrapper">
-        {/* Left Sidebar */}
-        {/* <ProductFilters /> */}
-
-        {/* Main Content */}
-        <div className="flex-1 md:col-span-3 ">
+      <div className="wrapper gap-8">
+        <div className="flex-1 md:col-span-3">
           <div className="grid md:grid-cols-2 gap-8">
             {/* Product Images */}
             <div className="space-y-4">
               <img
                 src={selectedImage}
-                alt={product.productName}
-                className="w-full rounded-lg"
+                alt={product.name}
+                className="w-full rounded-lg object-contain"
               />
               {/* Thumbnails */}
-              <div className="flex gap-4">
-                {[product.productImage, ...product.images].map((img, i) => (
+              <div className="flex gap-4 overflow-x-auto thin-scrollbar">
+                {product.images.map((img, i) => (
                   <img
                     key={i}
                     src={img}
-                    alt={`Thumbnail ${i}`}
+                    alt={`Thumbnail ${i + 1}`}
                     className={`w-20 h-20 rounded-lg cursor-pointer border ${
                       selectedImage === img ? "border-black" : "border-gray-300"
                     }`}
@@ -80,11 +127,9 @@ const ProductDetails = () => {
 
             {/* Product Details */}
             <div className="space-y-4">
-              <h1 className="small-heading">{product.productName}</h1>
+              <h1 className="small-heading">{product.name}</h1>
               <div className="flex items-center gap-2">
-                <span className="text-2xl font-bold">
-                  ${product.actualPrice}
-                </span>
+                <span className="text-2xl font-bold">₹{product.amount}</span>
                 <span className="text-sm text-gray-500">
                   Count(11,959 / Count)
                 </span>
@@ -140,22 +185,20 @@ const ProductDetails = () => {
             <div className="space-y-4">
               <h3 className="small-heading">Additional Information</h3>
               <div className="grid grid-cols-1 gap-4 text-sm">
-                {Object.entries(product.additionalInformation).map(
-                  ([key, value]) => (
-                    <div key={key} className="grid grid-cols-2">
-                      <p className="font-bold">{key}</p>
-                      <p>{Array.isArray(value) ? value.join(", ") : value}</p>
-                    </div>
-                  )
-                )}
+                {product.headings.map((heading, index) => (
+                  <div key={index} className="grid grid-cols-2">
+                    <p className="font-bold">{heading.title}</p>
+                    <p>{heading.description}</p>
+                  </div>
+                ))}
               </div>
             </div>
             <div>
               <div className="space-y-4">
                 <img
                   src={selectedImage}
-                  alt={product.productName}
-                  className="w-full rounded-lg"
+                  alt={product.name}
+                  className="w-full rounded-lg object-contain"
                 />
               </div>
             </div>
@@ -166,8 +209,8 @@ const ProductDetails = () => {
               <img
                 key={i}
                 src={img}
-                alt="product-image"
-                className="rounded-3xl cursor-pointer"
+                alt={`Product images ${i + 1}`}
+                className="rounded-3xl cursor-pointer object-contain"
                 onClick={() => setSelectedImage(img)}
               />
             ))}
@@ -175,7 +218,7 @@ const ProductDetails = () => {
         </div>
       </div>
       <div>
-        <ProductGrid products={products.slice(0, 4)} />
+        <ProductGrid products={relatedProducts} />
       </div>
       <TwoDogs />
     </div>

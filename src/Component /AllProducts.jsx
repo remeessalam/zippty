@@ -1,14 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
-import { products } from "../util/productsDetails";
+import { FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import ProductFilters from "./ProductFilters";
 import { useWishlist } from "../Store/wishlistContext";
-import { FaHeart } from "react-icons/fa";
+import { fetchProducts } from "../api/productapi";
 
 const AllProducts = () => {
   const { wishlist, addToWishlist, removeFromWishlist } = useWishlist();
   const [popups, setPopups] = useState({});
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  // Fetch products from backend on mount
+  useEffect(() => {
+    const fetchAllProducts = async () => {
+      try {
+        setLoading(true);
+        const response = await fetchProducts();
+        const backendProducts = response.products || [];
+        // Map backend products to frontend format
+        const formattedProducts = backendProducts.map((product) => ({
+          id: product._id,
+          title: product.name,
+          price: product.amount,
+          image: product.images[0] || "/placeholder.svg",
+          stock: product.stock || 10, // Default to 10 if stock is not provided
+        }));
+        setProducts(formattedProducts);
+      } catch (err) {
+        console.error("Error fetching products:", err);
+        setError(err.response?.data?.message || "Failed to load products");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchAllProducts();
+  }, []);
 
   const toggleWishlist = (product) => {
     if (wishlist.some((item) => item.id === product.id)) {
@@ -26,9 +55,25 @@ const AllProducts = () => {
     }, 100);
   };
 
+  if (loading) {
+    return (
+      <div className="container mx-auto px-4 py-8 text-center">
+        <p className="text-gray-500">Loading products...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="container mx-auto px-4 py-8 text-center">
+        <p className="text-red-500">{error}</p>
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="grid  gap-8">
+      <div className="grid gap-8">
         {/* <ProductFilters /> */}
         <main className="lg:col-span-4">
           {/* <div className="flex items-center justify-between mb-6">
@@ -46,7 +91,7 @@ const AllProducts = () => {
                 key={product.title}
                 className="group relative border rounded-lg overflow-hidden"
               >
-                <Link to="/product">
+                <Link to={`/product/${product.id}`}>
                   <div className="aspect-square overflow-hidden">
                     <img
                       src={product.image || "/placeholder.svg"}
@@ -83,7 +128,7 @@ const AllProducts = () => {
                           Currently unavailable
                         </span>
                       ) : (
-                        `$` + product.price.toFixed(2)
+                        `₹${product.price.toFixed(2)}` // Changed to ₹ to match CartItems
                       )}
                     </p>
                   </div>

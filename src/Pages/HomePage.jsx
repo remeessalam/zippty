@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Banner from "../Component /Banner";
 import homepagepetsimage from "../assets/images/homepagepetsimage.png";
 // import CategorySlider from "../Component /CategorySlider";
@@ -7,8 +7,10 @@ import HomeAbout from "../Component /HomeAbout";
 import Testimonials from "../Component /Testimonials";
 import Blogs from "../Component /Blogs";
 import ProductGrid from "../Component /ProductGrid";
-import { products } from "../util/productsDetails";
+// import { products } from "../util/productsDetails";
+import { fetchProducts } from "../api/productapi";
 const HomePage = () => {
+  const [products, setProducts] = useState([]);
   const homeBannerDetails = {
     mainHeading: "A pet store with everything you need",
     paragraph: `At Zippty, we know your pets are more than just animals—they’re family. Whether you have a curious kitten or an energetic dog,`,
@@ -16,6 +18,14 @@ const HomePage = () => {
     isHome: true,
     isButton: true,
   };
+  useEffect(() => {
+    const getProducts = async () => {
+      const res = await fetchProducts();
+      console.log(res, "askjdfhkjasdhfjkashdfjlashjldfh");
+      setProducts(res.products);
+    };
+    getProducts();
+  }, []);
   return (
     <div>
       <Banner bannerDetails={homeBannerDetails} />
