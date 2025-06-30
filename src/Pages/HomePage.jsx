@@ -30,7 +30,7 @@ const HomePage = () => {
     <div>
       <Banner bannerDetails={homeBannerDetails} />
       {/* <CategorySlider /> */}
-      <FeaturedProducts />
+      {/* <FeaturedProducts /> */}
       <HomeAbout />
       <div>
         <h1 className="title-heading text-center">Best selling products</h1>

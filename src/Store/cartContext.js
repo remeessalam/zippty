@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import { clearCartapi } from "../api/cartapi";
 
 const CartContext = createContext();
 
@@ -58,7 +59,8 @@ export const CartProvider = ({ children }) => {
     );
   };
 
-  const clearCart = () => {
+  const clearCart = (id) => {
+    clearCartapi(id);
     setCartItems([]);
   };
 

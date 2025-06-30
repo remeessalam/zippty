@@ -25,7 +25,7 @@ const Header = () => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
+  const token = localStorage.getItem("token");
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
@@ -86,14 +86,14 @@ const Header = () => {
 
         {/* Search and Icons */}
         <div className="flex items-center space-x-4">
-          <div className="relative hidden md:flex items-center">
+          {/* <div className="relative hidden md:flex items-center">
             <input
               type="text"
               placeholder="Search products..."
               className="pl-4 pr-10 py-2 rounded-full bg-gray-100 focus:outline-none"
             />
             <FaSearch className="absolute right-3 text-gray-400" size={20} />
-          </div>
+          </div> */}
 
           <div className="flex items-center gap-4">
             <Link to={"/wishlist"} className="relative">
@@ -107,6 +107,18 @@ const Header = () => {
               <span className="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                 {cartItems.length}
               </span>
+            </Link>
+            <Link
+              className="bg-primary text-white py-1 px-2 rounded-xl"
+              to={token ? "" : "/login"}
+              onClick={() => {
+                if (token) {
+                  localStorage.removeItem("token");
+                  window.location.reload();
+                }
+              }}
+            >
+              {token ? "Logout" : "Login"}
             </Link>
           </div>
           {/* Mobile Menu Button */}

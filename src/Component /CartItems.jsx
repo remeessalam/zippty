@@ -8,7 +8,7 @@ import { useRef, useEffect, useState } from "react";
 import bird from "../assets/images/bird.gif";
 import { getCart, removeFromCart } from "../api/cartapi";
 
-const CartItems = () => {
+const CartItems = ({ setOpenCheckOut }) => {
   const {
     cartItems,
     addToCart,
@@ -209,9 +209,10 @@ const CartItems = () => {
             )}
             <button
               ref={buttonRef}
+              onClick={() => setOpenCheckOut(true)}
               className="bg-[#2F5F3A] text-white py-3 px-6 rounded w-full md:w-auto"
             >
-              Save and pay now
+              Proceed to Checkout
             </button>
           </div>
         </div>

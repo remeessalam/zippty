@@ -5,6 +5,8 @@ import AppRouter from "./App";
 import { RouterProvider } from "react-router-dom";
 import { WishlistProvider } from "./Store/wishlistContext";
 import { CartProvider } from "./Store/cartContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -14,5 +16,6 @@ root.render(
         <RouterProvider router={AppRouter} />
       </WishlistProvider>
     </CartProvider>
+    <ToastContainer />
   </React.StrictMode>
 );
