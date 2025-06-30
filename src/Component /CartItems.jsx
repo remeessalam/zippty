@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useRef, useEffect, useState } from "react";
 import bird from "../assets/images/bird.gif";
 import { getCart, removeFromCart } from "../api/cartapi";
+import { toast } from "react-toastify";
 
 const CartItems = ({ setOpenCheckOut }) => {
   const {
@@ -58,8 +59,9 @@ const CartItems = ({ setOpenCheckOut }) => {
     try {
       await removeFromCart(productId);
       removeFromCartContext(productId); // Update context
-      alert("Item removed from cart");
+      toast.success("Item removed from cart");
     } catch (err) {
+      toast.error("Error removing item:", err);
       console.error("Error removing item:", err);
       setError(err.response?.data?.message || "Failed to remove item");
     }

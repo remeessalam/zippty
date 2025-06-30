@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BASE_API_URL } from "../util/contant";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -18,9 +19,10 @@ const Login = () => {
       });
       localStorage.setItem("token", response.data.token);
       navigate("/"); // Redirect to home or previous page
-      alert("Login successful!");
+      toast.success("Login successful!");
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
+      toast.error("Login failed");
     }
   };
 

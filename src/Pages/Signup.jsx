@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BASE_API_URL } from "../util/contant";
+import { toast } from "react-toastify";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -20,9 +21,10 @@ const Signup = () => {
       });
       localStorage.setItem("token", response.data.token);
       navigate("/"); // Redirect to home
-      alert("Signup successful!");
+      toast.success("Signup successful!");
     } catch (err) {
       setError(err.response?.data?.message || "Signup failed");
+      toast.error(err.response?.data?.message || "Signup failed");
     }
   };
 

@@ -8,6 +8,7 @@ import {
   FaShoppingCart,
   FaBars,
   FaTimes,
+  FaUser,
 } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import { navLinks } from "../util/contant";
@@ -96,17 +97,17 @@ const Header = () => {
           </div> */}
 
           <div className="flex items-center gap-4">
-            <Link to={"/wishlist"} className="relative">
-              <FaHeart size={24} />
-              <span className="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                {wishlist.length}
-              </span>
-            </Link>
             <Link to={"/cartitems"} className="relative mr-3">
               <FaShoppingCart size={24} />
               <span className="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                 {cartItems.length}
               </span>
+            </Link>
+            <Link to={"/profile"} className="relative">
+              <FaUser size={24} />
+              {/* <span className="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                {wishlist.length}
+              </span> */}
             </Link>
             <Link
               className="bg-primary text-white py-1 px-2 rounded-xl"

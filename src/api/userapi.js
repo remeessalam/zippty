@@ -85,3 +85,18 @@ export const verifyorder = async (xx) => {
     throw err;
   }
 };
+
+export const getUserOrders = async () => {
+  try {
+    const config = getAuthConfig();
+    const response = await axios.get(`${BASE_API_URL}/api/user/orders`, config);
+    return response.data;
+  } catch (error) {
+    const err = new Error(
+      error.response?.data?.message || "Failed to fetch orders"
+    );
+    err.response = error.response;
+    err.status = error.response?.status;
+    throw err;
+  }
+};

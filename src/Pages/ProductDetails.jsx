@@ -8,6 +8,7 @@ import { addToCart, fetchProducts, getProductById } from "../api/productapi";
 import Banner from "../Component /Banner";
 import ProductGrid from "../Component /ProductGrid";
 import TwoDogs from "../Component /TwoDogs";
+import { toast } from "react-toastify";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -73,10 +74,12 @@ const ProductDetails = () => {
         image: product.images[0],
         quantity: quantity,
       });
-      alert("Product added to cart successfully!");
+      toast.success("Product added to cart successfully!");
     } catch (err) {
       console.error("Error adding to cart:", err);
-      alert(err.response?.data?.message || "Failed to add product to cart");
+      toast.error(
+        err.response?.data?.message || "Failed to add product to cart"
+      );
     }
   };
 
