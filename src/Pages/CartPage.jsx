@@ -123,7 +123,7 @@ const CartPage = () => {
       console.log("Order response:", orderResponse);
       // Initialize Razorpay
       const options = {
-        key: "rzp_test_iVetw1LEDRlYMN",
+        key: process.env.REACT_APP_RAZORPAY_KEY_ID,
         amount: amount * 100,
         currency: "INR",
         name: "Zippty",
