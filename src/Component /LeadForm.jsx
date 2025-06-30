@@ -111,7 +111,7 @@ export default function ContactForm() {
               <div className="w-10 h-10 rounded-full bg-[#F47B20] flex items-center justify-center">
                 <FaEnvelope className="w-5 h-5 text-white" />
               </div>
-              <span>info@domain.com</span>
+              <span>info@zippty.in</span>
             </div>
 
             <div className="flex items-center gap-4">
