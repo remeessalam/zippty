@@ -1,6 +1,7 @@
 import axios from "axios";
 
-export const BASE_API_URL = "http://localhost:7070";
+export const BASE_API_URL = "https://zippybackend.vercel.app";
+// export const BASE_API_URL = "http://localhost:7070";
 
 const getAuthConfig = (isMultipart = false) => {
   // const token = localStorage.getItem("token");
