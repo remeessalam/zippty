@@ -1,8 +1,10 @@
 import backgroundbg from "../assets/images/imagebg.png";
 import homebackgroundbg from "../assets/images/homebg.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 const Banner = ({ bannerDetails }) => {
   const { mainHeading, paragraph, image, isHome, isButton } = bannerDetails;
+  const { pathname } = useLocation();
+
   return (
     <div className="relative">
       <div className="wrapper grid md:grid-cols-2 px-6 py-16 items">
@@ -43,7 +45,11 @@ const Banner = ({ bannerDetails }) => {
             <img
               src={image}
               alt="Collection of happy pet faces"
-              className="relative z-10 h-[15rem] md:h-[27rem] object-cover"
+              className={`relative z-10 h-[15rem] ${
+                pathname === "/contact-us"
+                  ? "h-[12rem] md:h-[22rem]"
+                  : "md:h-[27rem]"
+              } object-cover `}
             />
           </div>
         </div>

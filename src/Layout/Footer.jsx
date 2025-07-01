@@ -2,6 +2,7 @@ import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import ParticleFooter from "./FooterBubbles";
 import { useEffect, useState } from "react";
+import logo from "../assets/images/logo/logo.png";
 
 // Add this CSS to your global stylesheet or CSS module
 const styles = `
@@ -225,7 +226,9 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
           {/* Company Info */}
           <div className="">
-            <h2 className="text-2xl font-bold mb-4">Zippty</h2>
+            <Link to={"/"} className="text-xl font-bold ml-3">
+              <img src={logo} alt="logo" className="w-[4.5rem] sm:w-[6rem]" />
+            </Link>{" "}
             <p className="text-gray-600 mb-6 max-w-[18rem]">
               At Zippty, we know your pets are more than just animals—they're
               family. Whether you have a curious kitten or an energetic dog,

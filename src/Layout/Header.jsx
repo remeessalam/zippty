@@ -68,9 +68,9 @@ const Header = () => {
 
       {/* Main navigation */}
       <nav className="bg-white flex items-center justify-between px-16 py-4 wrapper rounded-full shadow-xl">
-        <div className="text-xl font-bold ml-3">
+        <Link to={"/"} className="text-xl font-bold ml-3">
           <img src={logo} alt="logo" className="w-[4.5rem] sm:w-[6rem]" />
-        </div>
+        </Link>
 
         {/* Desktop Navigation Links */}
         <div className="hidden md:flex items-center space-x-8">

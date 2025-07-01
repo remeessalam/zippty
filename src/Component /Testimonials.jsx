@@ -52,7 +52,7 @@ function Testimonials() {
     <div className="wrapper paddingTop paddingBottom">
       <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
         <div className="w-full lg:w-1/2 space-y-6">
-          <span className="companyName">Testimonials</span>
+          <span className="companyName">What our Customers Say</span>
           <h2 className="title-heading">What people say about us</h2>
 
           {/* Star Rating */}
