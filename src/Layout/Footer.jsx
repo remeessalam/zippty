@@ -222,7 +222,7 @@ const Footer = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
           {/* Company Info */}
           <div className="">
             <h2 className="text-2xl font-bold mb-4">Zippty</h2>
@@ -247,9 +247,9 @@ const Footer = () => {
           </div>
 
           {/* Company Links */}
-          <div className="flex flex-col items-start">
+          <div className="flex flex-col items-center">
             <h3 className="font-semibold text-lg mb-4">Company</h3>
-            <ul className="space-y-2">
+            <ul className="space-y-2 flex flex-col items-center">
               <li>
                 <Link
                   to="/about-us"
@@ -307,11 +307,12 @@ const Footer = () => {
           </div>
 
           {/* Store Info */}
-          <div>
+          <div className="flex flex-col items-center">
             <h3 className="font-semibold text-lg mb-4">Store</h3>
             <ul className="space-y-2">
               <li className="text-gray-600">
-                JP Colony, Shastri Nagar, Jaipur, Rajasthan - 302016
+                JP Colony, Shastri Nagar,
+                <br /> Jaipur, Rajasthan - 302016
               </li>
               <li className="text-gray-600">+91-XXXXX XXXXX</li>
               <li className="text-gray-600">info@domain.com</li>

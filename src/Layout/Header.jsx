@@ -40,10 +40,12 @@ const Header = () => {
 
   return (
     <header
-      className={`w-full fixed z-40 transition-transform duration-500 ${
-        isVisible ? "translate-y-0" : "-translate-y-full"
-      }`}
+      className={`w-full fixed z-40 transition-transform duration-500
+        `}
     >
+      {/* ${
+     isVisible ? "translate-y-0" : "-translate-y-full"
+   } */}
       {/* Top bar */}
       <div className="hidden md:flex justify-between items-center px-6 py-2 bg-white">
         <div className="flex items-center space-x-6">
@@ -76,8 +78,10 @@ const Header = () => {
             <Link
               key={link.path}
               to={link.path}
-              className={`hover:text-primary ${
-                location.pathname === link.path ? "text-primary" : "text-black"
+              className={`hover:text-primary hover:font-semibold transition-all duration-300 ${
+                location.pathname === link.path
+                  ? "text-primary font-semibold"
+                  : "text-black"
               }`}
             >
               {link.label}
@@ -98,19 +102,25 @@ const Header = () => {
 
           <div className="flex items-center gap-4">
             <Link to={"/cartitems"} className="relative mr-3">
-              <FaShoppingCart size={24} />
+              <FaShoppingCart
+                size={24}
+                className="hover:scale-105 transition-all duration-300"
+              />
               <span className="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                 {cartItems.length}
               </span>
             </Link>
             <Link to={"/profile"} className="relative">
-              <FaUser size={24} />
+              <FaUser
+                size={24}
+                className="hover:scale-105 transition-all duration-300"
+              />
               {/* <span className="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                 {wishlist.length}
               </span> */}
             </Link>
             <Link
-              className="bg-primary text-white py-1 px-2 rounded-xl"
+              className="bg-primary text-white py-1 px-2 rounded-xl hover:scale-105 transition-all duration-300"
               to={token ? "" : "/login"}
               onClick={() => {
                 if (token) {

@@ -21,7 +21,7 @@ const Banner = ({ bannerDetails }) => {
             {isButton && (
               <Link
                 to={"/shop"}
-                className="bg-black w-fit text-white px-8 py-3 rounded-md hover:bg-gray-800 transition-colors"
+                className="bg-black w-fit text-white px-8 py-3 rounded-md hover:bg-primary transition-colors duration-300"
               >
                 Shop Now
               </Link>
