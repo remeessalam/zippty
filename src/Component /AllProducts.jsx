@@ -104,7 +104,7 @@ const AllProducts = () => {
                       <h3 className="font-medium text-sm line-clamp-2">
                         {product.title}
                       </h3>
-                      <button
+                      {/* <button
                         onClick={(e) => {
                           e.preventDefault();
                           toggleWishlist(product);
@@ -120,7 +120,7 @@ const AllProducts = () => {
                         ) : (
                           <AiOutlineHeart className="w-5 h-5 text-gray-600 hover:text-orange-500" />
                         )}
-                      </button>
+                      </button> */}
                     </div>
                     <p className="font-bold mt-2">
                       {!product.stock ? (

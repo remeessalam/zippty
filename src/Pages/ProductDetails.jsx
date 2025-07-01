@@ -133,9 +133,7 @@ const ProductDetails = () => {
               <h1 className="small-heading">{product.name}</h1>
               <div className="flex items-center gap-2">
                 <span className="text-2xl font-bold">₹{product.amount}</span>
-                <span className="text-sm text-gray-500">
-                  Count(11,959 / Count)
-                </span>
+                <span className="text-sm text-gray-500">(Incl. GST) </span>
               </div>
               <div className="flex items-center gap-1">
                 {"★★★★★".split("").map((star, i) => (

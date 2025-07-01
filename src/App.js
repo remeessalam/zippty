@@ -20,6 +20,7 @@ import AdminAddProduct from "./Admin/AdminPage/AdminAddProduct";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import ProfilePage from "./Pages/ProfilePage";
+import BlogDetails from "./Pages/BlogDetails";
 
 const AppRouter = createBrowserRouter([
   {
@@ -31,6 +32,7 @@ const AppRouter = createBrowserRouter([
       { path: "/contact-us", element: <ContactusPage /> },
       { path: "/cartitems", element: <CartPage /> },
       { path: "/shop", element: <ProductPage /> },
+      { path: "/blog/:id", element: <BlogDetails /> },
       { path: "/product/:id", element: <ProductDetails /> },
       { path: "/profile", element: <ProfilePage /> },
       { path: "/privacy-policy", element: <PrivacyPolicyPage /> },

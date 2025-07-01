@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import blog1 from "../assets/images/blogs/blog1.png";
 import blog2 from "../assets/images/blogs/blog2.png";
 import blog3 from "../assets/images/blogs/blog3.png";
@@ -28,7 +29,10 @@ const Blogs = () => {
         <h1 className="title-heading text-center mb-6">News & Blog</h1>{" "}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {blogsDetails.map((obj) => (
-            <div className="rounded-2xl overflow-hidden">
+            <Link
+              to={`/blog/${obj.id}`}
+              className="rounded-2xl overflow-hidden"
+            >
               <div className="relative">
                 <div className="absolute top-3 left-3 bg-black text-white px-5 py-1 rounded-full font-medium">
                   News
@@ -43,7 +47,7 @@ const Blogs = () => {
                 <p>{obj.date}</p>
                 <h2 className="text-xl font-bold">{obj.title}</h2>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
